@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import MyComponent from '@/components/ComponentConfig.vue'
+const TestArray = [{ id: 1 }, { id: 2 }, { id: 3 }]
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <div>
+    <h1>Page Principale</h1>
+    <MyComponent v-for="item in TestArray" :key="item.id" :index="item.id" />
+  </div>
 </template>
+<style lang="scss">
+div {
+  h1 {
+    color: $primaryColor;
+  }
+}
+</style>
