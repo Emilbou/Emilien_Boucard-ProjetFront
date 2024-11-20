@@ -12,7 +12,7 @@ const TestArray = [{ id: 1 }, { id: 2 }, { id: 3 }]
 <style lang="scss">
 div {
   h1 {
-    color: red;
+    color: $primaryColor;
   }
 }
 </style>
