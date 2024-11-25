@@ -51,7 +51,6 @@ const checked = computed({
   &:checked {
     border: $primaryColor solid rem(2px);
     background-color: $primaryColor;
-    margin: 0px;
     position: relative;
 
     &:before {
