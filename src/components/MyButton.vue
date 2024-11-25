@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 defineProps<{
-  variant?: 'primary' | 'outline' | 'disabled'
+  disabled: boolean
+  variant?: 'primary' | 'outline'
 }>()
 </script>
 
@@ -9,7 +10,7 @@ defineProps<{
     :class="{
       button: true,
       '-outline': variant === 'outline',
-      '-disabled': variant === 'disabled',
+      '-disabled': disabled,
     }"
   >
     <slot></slot>
