@@ -25,6 +25,8 @@ defineProps({
   display: flex;
   align-items: center;
   position: relative;
+  display: flex;
+  margin-bottom: 4px;
 
   @keyframes AnimateProgress {
     from {
@@ -35,7 +37,7 @@ defineProps({
     }
   }
   &__progress {
-    animation: AnimateProgress forwards 1s ease-out;
+    animation: AnimateProgress forwards 1s cubic-bezier(0.62, 0, 0, 1.01);
     height: 100%;
     background-color: $primaryColor;
     border-radius: 999px;
