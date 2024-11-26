@@ -5,24 +5,33 @@ defineProps({
     type: Number,
     default: 50,
   },
-  Text: {
+  text: {
     type: String,
     default: 'Progress Bar Title',
+  },
+  description: {
+    type: String,
+    default: 'description',
+  },
+  titre: {
+    type: String,
+    default: 'Titre',
   },
 })
 </script>
 <template>
   <div class="CardHabit">
-    <h2 class="CardHabit__Title">titre</h2>
-    <h3>Description</h3>
+    <h2 class="CardHabit__Title">{{ titre }}</h2>
+    <h3>{{ description }}</h3>
     <ProgressBarTitle :progress="progress" />
     <ul>
-      <li>Participants aujourd'hui : {{ Text }}</li>
-      <li>Participants ce mois-ci : {{ Text }}</li>
-      <li>Participants totaux : {{ Text }}</li>
+      <li>Participants aujourd'hui : {{ text }}</li>
+      <li>Participants ce mois-ci : {{ text }}</li>
+      <li>Participants totaux : {{ text }}</li>
     </ul>
   </div>
 </template>
+
 <style lang="scss">
 .CardHabit {
   border: 0.25px solid $gray800;
