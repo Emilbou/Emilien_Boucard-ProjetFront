@@ -1,5 +1,11 @@
 <script setup lang="ts">
 import ProgressBarTitle from '../ProgressBarTitle/ProgressBarTitle.vue'
+import { ref } from 'vue'
+import VueDatePicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
+import CheckBox from '../Checkbox/CheckBox.vue'
+
+const date = ref()
 defineProps({
   progress: {
     type: Number,
@@ -29,6 +35,10 @@ defineProps({
       <li>Participants ce mois-ci : {{ text }}</li>
       <li>Participants totaux : {{ text }}</li>
     </ul>
+    <div class="CardHabit__updateSection">
+      <VueDatePicker v-model="date" :enable-time-picker="false"></VueDatePicker>
+      <CheckBox />
+    </div>
   </div>
 </template>
 
@@ -49,6 +59,14 @@ defineProps({
       color: $primaryColor;
       font-size: 1.5rem;
     }
+  }
+  .CardHabit__updateSection {
+    display: flex;
+    width: 100%;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
   }
 }
 </style>
