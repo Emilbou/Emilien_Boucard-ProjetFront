@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Card from './Card.vue'
+import CardMulti from '@/components/Cards/CardMulti.vue'
 import { ref } from 'vue'
 
 // Utilisation de ref pour rendre le tableau réactif
@@ -53,7 +53,7 @@ const truncateDescriptions = (description: string) => {
 
 <template>
   <div class="CardsContainer">
-    <Card
+    <CardMulti
       v-for="item in CardArray"
       :key="item.id"
       :progress="item.process"

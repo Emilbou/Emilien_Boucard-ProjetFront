@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ProgressBarTitle from '../ProgressBarTitle/ProgressBarTitle.vue'
 import { ref } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -30,18 +29,13 @@ defineProps({
   <div class="CardHabit">
     <h2 class="CardHabit__Title">{{ titre }}</h2>
     <h3>{{ description }}</h3>
-    <ProgressBarTitle :progress="progress" />
-    <ul>
-      <li>Participants aujourd'hui : {{ text }}</li>
-      <li>Participants ce mois-ci : {{ text }}</li>
-      <li>Participants totaux : {{ text }}</li>
-    </ul>
+    <slot></slot>
     <div class="CardHabit__dateSection">
       <VueDatePicker v-model="date" :enable-time-picker="false"></VueDatePicker>
       <CheckBox />
     </div>
-    <MyButton>Ajouter</MyButton>
-    <MyButton class="CardHabit__Button">Voir l'historique</MyButton>
+    <MyButton :disabled="false">Ajouter</MyButton>
+    <MyButton class="CardHabit__Button" :disabled="false">Voir l'historique</MyButton>
   </div>
 </template>
 
@@ -57,12 +51,7 @@ defineProps({
     margin-top: 0;
     text-transform: uppercase;
   }
-  ul {
-    li::marker {
-      color: $primaryColor;
-      font-size: 1.5rem;
-    }
-  }
+
   .CardHabit__dateSection {
     display: flex;
     width: 100%;

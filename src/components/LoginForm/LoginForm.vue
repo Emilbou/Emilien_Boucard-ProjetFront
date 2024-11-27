@@ -21,11 +21,12 @@ defineProps({
   <div class="Login">
     <div class="Login__layout">
       <h1 class="Login__Title">{{ TextLog }}</h1>
+
       <MyInput placeholder="Nom d'utilisateur" />
       <MyInput placeholder="Mot de passe" />
       <div class="Login__buttonContainer">
         <RouterLink class="Login_SwapText" :to="UrlSwap">{{ TextSwap }}</RouterLink>
-        <MyButton class="Login__button">></MyButton>
+        <MyButton :disabled="false" class="Login__button">></MyButton>
       </div>
     </div>
   </div>
