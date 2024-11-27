@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MyInput from '@/components/Input/MyInput.vue'
 import MyButton from '@/components/Button/MyButton.vue'
+import { RouterLink } from 'vue-router'
 defineProps({
   TextLog: {
     type: String,
@@ -9,6 +10,10 @@ defineProps({
   TextSwap: {
     type: String,
     default: 'Pas de compte ?',
+  },
+  UrlSwap: {
+    type: String,
+    default: '/register',
   },
 })
 </script>
@@ -19,7 +24,7 @@ defineProps({
       <MyInput placeholder="Nom d'utilisateur" />
       <MyInput placeholder="Mot de passe" />
       <div class="Login__buttonContainer">
-        <p class="Login_SwapText">{{ TextSwap }}</p>
+        <RouterLink class="Login_SwapText" :to="UrlSwap">{{ TextSwap }}</RouterLink>
         <MyButton class="Login__button">></MyButton>
       </div>
     </div>

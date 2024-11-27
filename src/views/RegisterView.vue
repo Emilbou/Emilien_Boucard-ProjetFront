@@ -2,5 +2,5 @@
 import LoginForm from '@/components/LoginForm/LoginForm.vue'
 </script>
 <template>
-  <LoginForm TextLog="S'inscrire" TextSwap="Déjà un compte ?" />
+  <LoginForm TextLog="S'inscrire" TextSwap="Déjà un compte ?" UrlSwap="/login" />
 </template>
