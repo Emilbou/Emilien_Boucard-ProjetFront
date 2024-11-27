@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import CheckBox from '../Checkbox/CheckBox.vue'
+import MyButton from '../Button/MyButton.vue'
 
 const date = ref()
 defineProps({
@@ -35,10 +36,12 @@ defineProps({
       <li>Participants ce mois-ci : {{ text }}</li>
       <li>Participants totaux : {{ text }}</li>
     </ul>
-    <div class="CardHabit__updateSection">
+    <div class="CardHabit__dateSection">
       <VueDatePicker v-model="date" :enable-time-picker="false"></VueDatePicker>
       <CheckBox />
     </div>
+    <MyButton>Ajouter</MyButton>
+    <MyButton class="CardHabit__Button">Voir l'historique</MyButton>
   </div>
 </template>
 
@@ -60,13 +63,17 @@ defineProps({
       font-size: 1.5rem;
     }
   }
-  .CardHabit__updateSection {
+  .CardHabit__dateSection {
     display: flex;
     width: 100%;
     gap: 1rem;
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
+  }
+  .CardHabit__Button {
+    background-color: $primaryDarkColor;
+    padding: rem(8px) rem(16px);
   }
 }
 </style>

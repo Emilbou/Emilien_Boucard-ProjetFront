@@ -26,6 +26,8 @@ defineProps<{
   border: 1px solid $primaryColor;
   text-decoration: none;
   cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
 
   &:hover {
     background: $primaryDarkColor;
