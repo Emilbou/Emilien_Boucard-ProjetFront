@@ -19,5 +19,8 @@ div {
   h1 {
     color: $primaryColor;
   }
+  h4 {
+    font-weight: 400;
+  }
 }
 </style>

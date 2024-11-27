@@ -13,7 +13,7 @@ defineProps({
 </script>
 <template>
   <div class="ProgressBarTitle">
-    <h3 class="ProgressBarTitle_Title">Progression globale</h3>
+    <h4 class="ProgressBarTitle_Title">Progression globale</h4>
     <div class="ProgressBarTitle_layout">
       <ProgressBar :progress="progress" />
       <span class="ProgressBarTitle_textprogress">{{ progress }}%</span>
@@ -28,8 +28,9 @@ defineProps({
   justify-content: start;
   align-items: start;
   width: 100%;
+  font-size: 1.25rem;
   .ProgressBarTitle_Title {
-    margin-bottom: 0;
+    margin: 0;
   }
   .ProgressBarTitle_layout {
     display: flex;
