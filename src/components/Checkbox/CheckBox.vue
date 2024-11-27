@@ -34,7 +34,7 @@ const checked = computed({
   background-color: transparent;
   border: 1px solid $gray400;
   border-radius: rem(4px);
-  width: rem(24px);
+  width: rem(40px);
   aspect-ratio: 1 / 1;
   transition: 0.5s;
   outline: none;
