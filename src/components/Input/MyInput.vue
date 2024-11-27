@@ -59,7 +59,7 @@ defineEmits<{
   cursor: pointer;
   font-size: rem(16px);
   transition: 0.5s;
-  background: transparent;
+  background: white;
 
   &:focus {
     border: $primaryColor solid 2px !important;
