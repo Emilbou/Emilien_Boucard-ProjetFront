@@ -3,9 +3,9 @@ import './assets/scss/main.scss'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const app = createApp(App)
-import '@vuepic/vue-datepicker/dist/main.css'
 
 app.use(router)
 

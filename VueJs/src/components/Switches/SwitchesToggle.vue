@@ -40,7 +40,7 @@ defineEmits<{
     }"
     :disabled="disabled"
     @change="$emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
-  />
+  >
 </template>
 
 <style lang="scss">

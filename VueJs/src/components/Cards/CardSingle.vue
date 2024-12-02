@@ -7,5 +7,5 @@ defineProps<{
 }>()
 </script>
 <template>
-  <CardTemplate> </CardTemplate>
+  <CardTemplate/>
 </template>

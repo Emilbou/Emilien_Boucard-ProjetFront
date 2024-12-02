@@ -29,9 +29,9 @@ defineProps({
   <div class="CardHabit">
     <h2 class="CardHabit__Title">{{ titre }}</h2>
     <h3>{{ description }}</h3>
-    <slot></slot>
+    <slot/>
     <div class="CardHabit__dateSection">
-      <VueDatePicker v-model="date" :enable-time-picker="false"></VueDatePicker>
+      <VueDatePicker v-model="date" :enable-time-picker="false"/>
       <CheckBox />
     </div>
     <MyButton :disabled="false">Ajouter</MyButton>

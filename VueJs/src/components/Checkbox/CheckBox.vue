@@ -20,7 +20,7 @@ const checked = computed({
 </script>
 
 <template>
-  <input type="checkbox" class="checkbox" v-model="checked" />
+  <input v-model="checked" type="checkbox" class="checkbox" >
 </template>
 
 <style lang="scss">

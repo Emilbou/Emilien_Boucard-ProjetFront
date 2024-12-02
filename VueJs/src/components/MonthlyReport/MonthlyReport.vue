@@ -2,7 +2,7 @@
 
 <template>
   <h1>Générer un rapport mensuel</h1>
-  <div></div>
+  <div/>
 </template>
 
 <style lang="scss"></style>

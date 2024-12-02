@@ -31,7 +31,7 @@ const handleAnimationEnd = () => {
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @animationend="handleAnimationEnd"
-  ></div>
+  />
 </template>
 
 <style lang="scss">

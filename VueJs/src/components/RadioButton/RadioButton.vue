@@ -33,7 +33,7 @@ defineEmits<{
     :name="name"
     :disabled="disabled"
     @change="$emit('update:modelValue', value)"
-  />
+  >
 </template>
 
 <style lang="scss">

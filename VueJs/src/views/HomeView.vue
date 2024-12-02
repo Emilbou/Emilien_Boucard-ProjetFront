@@ -14,7 +14,7 @@ const TestArray = [{ id: 1 }, { id: 2 }, { id: 3 }]
     <MyComponent v-for="item in TestArray" :key="item.id" :index="item.id" />
     <ProgressBarTitle :progress="20" />
     <CardContainer />
-    <hr />
+    <hr >
     <CardTemplate />
     <MonthlyReport />
   </div>

@@ -35,7 +35,6 @@ defineEmits<{
   <input
     type="text"
     :value="modelValue"
-    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     :placeholder="placeholder"
     :disabled="disabled"
     class="input"
@@ -45,7 +44,8 @@ defineEmits<{
       '-error': error,
       '-small': small,
     }"
-  />
+    @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+  >
 </template>
 
 <style lang="scss">

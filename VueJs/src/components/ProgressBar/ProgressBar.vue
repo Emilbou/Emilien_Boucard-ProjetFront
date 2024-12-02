@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div class="progress-bar">
-    <div class="progress-bar__progress" :style="{ '--progressBar': `${progress}%` }"></div>
+    <div class="progress-bar__progress" :style="{ '--progressBar': `${progress}%` }"/>
   </div>
 </template>
 
