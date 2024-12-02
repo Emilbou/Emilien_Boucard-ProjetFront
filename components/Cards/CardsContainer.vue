@@ -36,6 +36,28 @@ const CardArray = ref([
     description: 'Description complète du cinquième élément avec ses particularités',
     titre: 'Carte 5',
   },
+  {
+    id: 6,
+    process: 60,
+    text: '1',
+    description: 'Description détaillée du sixième élément et de ses caractéristiques spécifiques',
+    titre: 'Carte 6',
+  },
+  {
+    id: 7,
+    process: 70,
+    text: '1',
+    description: 'Description approfondie du septième élément et de ses fonctionnalités',
+    titre: 'Carte 7',
+  },
+  {
+    id: 8,
+    process: 80,
+    text: '1',
+    description: "Explication détaillée du huitième élément et de son rôle dans l'ensemble",
+    titre: 'Carte 8',
+  
+  }
 ])
 
 
@@ -54,19 +76,24 @@ const truncateCards = (cards: typeof CardArray) => {
   }
   return cards.value
 }
+const expandToggle = ref(false)
 </script>
 
 <template>
-  <div class="CardsContainer">
-    <CardMulti
-      v-for="item in truncateCards(ref(CardArray))"
-      :key="item.id"
-      :progress="item.process"
-      :text="item.text"
-      :description="truncateDescriptions(item.description)"
-      :titre="item.titre"
-    />
-  </div>
+    <TransitionGroup name="list" tag="div" class="CardsContainer">
+      <CardMulti
+        v-for="item in expandToggle ? CardArray : truncateCards(ref(CardArray))"
+        :key="item.id"
+        :progress="item.process"
+        :text="item.text"
+        :description="truncateDescriptions(item.description)"
+        :titre="item.titre"
+      />
+    </TransitionGroup>
+  <ExpandableButton 
+  
+      :toggle-props="expandToggle"
+  @toggle-expand="expandToggle = !expandToggle" />
 </template>
 
 <style lang="scss">
@@ -74,5 +101,14 @@ const truncateCards = (cards: typeof CardArray) => {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
+}
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
 }
 </style>

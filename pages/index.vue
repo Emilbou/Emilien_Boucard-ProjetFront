@@ -2,7 +2,7 @@
   <div>
     page accueil
 
-    <MyButton :disabled="false">boutonfkjb</MyButton>
+    <MyButton :disabled="false">Le slot du bouton</MyButton>
     <CardsContainer/>
 <CardTemplate/>
   </div>
