@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
+    <NuxtPage/>
+<MyButton>boutonfkjb</MyButton>
   </div>
 </template>
