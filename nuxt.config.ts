@@ -4,7 +4,20 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/eslint'],
 
+
+  storybook: {
+    port: 6006,
+  },
+
 css: ['@/assets/scss/main.scss'],
+
+
+components: [
+  {
+    path: '~/components/',
+    pathPrefix: false,
+  }
+],
 
   vite: {
     css: {
@@ -20,4 +33,3 @@ css: ['@/assets/scss/main.scss'],
     },
   }
 })
-
