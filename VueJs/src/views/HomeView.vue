@@ -3,6 +3,7 @@ import MyComponent from '@/components/ComponentConfig.vue'
 import ProgressBarTitle from '@/components/ProgressBarTitle/ProgressBarTitle.vue'
 import CardContainer from '@/components/Cards/CardsContainer.vue'
 import CardTemplate from '@/components/Cards/CardTemplate.vue'
+import MonthlyReport from '@/components/MonthlyReport/MonthlyReport.vue'
 const userInfo = 'Emilien'
 const TestArray = [{ id: 1 }, { id: 2 }, { id: 3 }]
 </script>
@@ -15,16 +16,20 @@ const TestArray = [{ id: 1 }, { id: 2 }, { id: 3 }]
     <CardContainer />
     <hr />
     <CardTemplate />
+    <MonthlyReport />
   </div>
 </template>
 
 <style lang="scss">
-div {
-  h1 {
-    color: $primaryColor;
+h1 {
+  color: $primaryColor;
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
   }
-  h4 {
-    font-weight: 400;
-  }
+}
+h4 {
+  font-weight: 400;
 }
 </style>
