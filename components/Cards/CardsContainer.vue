@@ -38,6 +38,7 @@ const CardArray = ref([
   },
 ])
 
+
 const truncateDescriptions = (description: string) => {
   console.log(description)
   if (description.length > 50) {
@@ -47,18 +48,18 @@ const truncateDescriptions = (description: string) => {
   }
 }
 
-const truncateCards = (cards: CardArray) => {
-  if (cards.length > 4) {
-    return cards.slice(0, 4 )
+const truncateCards = (cards: typeof CardArray) => {
+  if (cards.value.length > 4) {
+    return cards.value.slice(0, 4)
   }
-  return cards
+  return cards.value
 }
 </script>
 
 <template>
   <div class="CardsContainer">
     <CardMulti
-      v-for="item in truncateCards(CardArray)"
+      v-for="item in truncateCards(ref(CardArray))"
       :key="item.id"
       :progress="item.process"
       :text="item.text"
