@@ -5,10 +5,6 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
 
 
-  storybook: {
-    port: 6006,
-  },
-
 css: ['@/assets/scss/main.scss'],
 
 
