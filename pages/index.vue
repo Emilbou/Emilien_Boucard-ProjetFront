@@ -1,3 +1,7 @@
 <template>
-    <div>page accueil</div>
+    <div>page accueil
+
+        <MyButton>boutonfkjb</MyButton>
+
+    </div>
 </template>

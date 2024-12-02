@@ -1,6 +1,7 @@
 <template>
   <div>
-    <NuxtPage/>
-<MyButton>boutonfkjb</MyButton>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
   </div>
 </template>
