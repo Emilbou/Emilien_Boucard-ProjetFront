@@ -1,5 +1,5 @@
 <template>
-    <div>layout minimal
+    <div>
         <slot/>
     </div>
 </template>

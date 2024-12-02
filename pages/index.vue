@@ -1,7 +1,10 @@
 <template>
-    <div>page accueil
+  <div>
+    page accueil
 
-        <MyButton :disabled="false">boutonfkjb</MyButton>
-
-    </div>
+    <MyButton :disabled="false">boutonfkjb</MyButton>
+    <CardsContainer/>
+<CardTemplate/>
+<CardProgress progress="50" text="text" />
+  </div>
 </template>

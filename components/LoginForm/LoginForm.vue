@@ -1,15 +1,15 @@
 <script setup lang="ts">
 
 defineProps({
-  TextLog: {
+  textLog: {
     type: String,
     default: 'Se connecter',
   },
-  TextSwap: {
+  textSwap: {
     type: String,
     default: 'Pas de compte ?',
   },
-  UrlSwap: {
+  urlSwap: {
     type: String,
     default: '/register',
   },
@@ -18,12 +18,12 @@ defineProps({
 <template>
   <div class="Login">
     <div class="Login__layout">
-      <h1 class="Login__Title">{{ TextLog }}</h1>
+      <h1 class="Login__Title">{{ textLog }}</h1>
 
       <MyInput placeholder="Nom d'utilisateur" />
       <MyInput placeholder="Mot de passe" />
       <div class="Login__buttonContainer">
-        <NuxtLink class="Login_SwapText" :to="UrlSwap">{{ TextSwap }}</NuxtLink>
+        <NuxtLink class="Login_SwapText" :to="urlSwap">{{ textSwap }}</NuxtLink>
         <MyButton :disabled="false" class="Login__button">></MyButton>
       </div>
     </div>
