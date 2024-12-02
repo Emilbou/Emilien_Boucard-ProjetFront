@@ -1,7 +1,7 @@
 <template>
     <div>page accueil
 
-        <MyButton>boutonfkjb</MyButton>
+        <MyButton :disabled="false">boutonfkjb</MyButton>
 
     </div>
 </template>
