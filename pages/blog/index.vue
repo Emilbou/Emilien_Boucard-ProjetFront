@@ -7,10 +7,15 @@ const POSTS_QUERY = groq`*[
 ]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
 
 const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
+console.log(posts);
 </script>
 
 <template>
- <div>
-    {{ posts }}
- </div>
+  <nav>
+    <ul>
+      <li v-for="post in posts" :key="post._id">
+        <NuxtLink :to="`/blog/${post.slug.current}`">{{ post.title }}</NuxtLink>
+      </li>
+    </ul>
+  </nav>
 </template>
