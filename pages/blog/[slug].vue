@@ -12,6 +12,14 @@ const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
+
+    if (!post.value) {
+     navigateTo('/404')
+//   throw createError({
+//     statusCode: 404,
+//     statusMessage: 'Page Not Found'
+//   })
+}
 </script>
 
 <template>
