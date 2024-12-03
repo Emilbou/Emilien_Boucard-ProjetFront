@@ -14,11 +14,11 @@ const urlFor = (source: SanityImageSource) =>
     : null;
 
     if (!post.value) {
-     navigateTo('/404')
-//   throw createError({
-//     statusCode: 404,
-//     statusMessage: 'Page Not Found'
-//   })
+    //  navigateTo('/404')
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page Not Found'
+  })
 }
 </script>
 
@@ -39,7 +39,6 @@ const urlFor = (source: SanityImageSource) =>
         Published: {{ new Date(post.publishedAt).toLocaleDateString() }}
       </p>
       <SanityContent v-if="post.body" :blocks="post.body" />
-      <SanityImage :asset-id="post.image.asset._ref" style="max-width: 100%;"/>
     </div>
   </main>
 </template>
