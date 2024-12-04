@@ -73,7 +73,7 @@ const totalPages = computed(() =>
    <h1>Posts</h1>
    <div v-if="posts?.length">
      <div v-for="post in posts" :key="post._id">
-       <NuxtLink :to="`/${post.slug.current}`">
+       <NuxtLink :to="`/blog/${post.slug.current}`">
          <h2>{{ post.title }}</h2>
          <p>{{ new Date(post.publishedAt).toLocaleDateString() }}</p>
          <p v-if="post.category">{{ post.category.title }}</p>

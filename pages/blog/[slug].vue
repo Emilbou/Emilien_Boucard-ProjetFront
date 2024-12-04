@@ -3,23 +3,34 @@ import type { SanityDocument } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
+
+
 const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]`;
 const { params } = useRoute();
 
 const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, params);
 const { projectId, dataset } = useSanity().client.config();
 const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
+projectId && dataset
+? imageUrlBuilder({ projectId, dataset }).image(source)
+: null;
 
-    if (!post.value) {
-    //  navigateTo('/404')
+if (!post.value) {
+  //  navigateTo('/404')
   throw createError({
     statusCode: 404,
     statusMessage: 'Page Not Found'
   })
 }
+
+//réutiliser ca partout pour le seo
+useSeoMeta({
+  title:"Blog | " + post.value.title,
+  description: post.value.description,
+  ogTitle: post.value.title,
+  ogDescription: post.value.description,
+  ogImage: urlFor(post.value.image)?.width(1200).height(630).url(),
+})
 </script>
 
 <template>
