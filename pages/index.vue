@@ -7,6 +7,13 @@ const POSTS_QUERY = groq`*[
 ]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
 
 const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
+
+useSeoMeta({
+  title:"Page accueil",
+  description: "Description de la Page accueil",
+  ogTitle: "Page accueil",
+  ogDescription: "Description de la Page accueil",
+})
 </script>
 
 <template>
