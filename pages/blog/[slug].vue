@@ -29,7 +29,7 @@ useSeoMeta({
   description: post.value.description,
   ogTitle: post.value.title,
   ogDescription: post.value.description,
-  ogImage: urlFor(post.value.image)?.width(1200).height(630).url(),
+  ogImage: post.value.image && urlFor(post.value.image) ? urlFor(post.value.image)?.url() : '/meta-default.png',
 })
 </script>
 
