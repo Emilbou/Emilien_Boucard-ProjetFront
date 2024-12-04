@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint'],
+  modules: ['@nuxt/eslint', '@nuxtjs/sanity'],
   
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
@@ -10,7 +10,10 @@ export default defineNuxtConfig({
 
 css: ['@/assets/scss/main.scss'],
 
-
+  sanity: {
+    projectId: "860uk13t",
+    dataset: "production",
+  },
 
 
 components: [
