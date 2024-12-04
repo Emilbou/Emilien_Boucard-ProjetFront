@@ -1,64 +1,80 @@
 <script setup lang="ts">
-import type { SanityDocument } from "@sanity/client";
+import type { SanityDocument } from '@sanity/client'
+import imageUrlBuilder from '@sanity/image-url'
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
+const urlFor = (source: SanityImageSource) =>
+  projectId && dataset
+    ? imageUrlBuilder({ projectId, dataset }).image(source)
+    : null
 
-const POSTS_QUERY = `*[_type == "post" && defined(slug.current)]|order(publishedAt desc)[0...12]{
-  _id,
+const selectCategory = ref('')
+
+function onPageClick(i: number) {
+  page.value = i
+}
+
+const page = ref(1)
+const postsPerPage = 2
+
+const startPost = computed(() => (page.value - 1) * postsPerPage)
+const endPost = computed(() => page.value * postsPerPage)
+
+const CATEGORIES_QUERY = groq`*[_type == "category"]{
   title,
-  slug,
-  publishedAt,
-  "category": category->
-}`;
+  slug
+}`
 
-const filter = ref('');
+const { data: categories } = await useSanityQuery<SanityDocument[]>(CATEGORIES_QUERY)
+const { projectId, dataset } = useSanity().client.config()
 
-const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
-const { data: categories } = await useSanityQuery<SanityDocument[]>(`*[_type == "category"]`);
+const { data: posts } = await useSanityQuery<SanityDocument[]>(groq`*[
+  _type == "post"
+  && defined(slug.current)
+  && ($selectCategory == '' || category->slug.current == $selectCategory)
+]|order(publishedAt desc)[$startPost...$endPost]{
+  _id, 
+  title, 
+  slug, 
+  publishedAt, 
+  image, 
+  "category": category->{title, slug}
+}`, { selectCategory, startPost: startPost, endPost: endPost })
 
-const filteredPosts = ref<SanityDocument[]>([]);
 
-watchEffect(async () => {
-  if (filter.value) {
-    const { data } = await useSanityQuery<SanityDocument[]>(
-      `*[_type == "post" && category->title == $title]`,
-      { title: filter.value }
-    );
-    filteredPosts.value = data.value || [];
-  }
-});
-
-console.log(posts);
 
 </script>
 
 <template>
   <div>
-    <select v-if="categories" id="option_id"  v-model="filter" name="option">
-      <option v-for="cat in categories" :key="cat._id" :value="cat.title">{{cat.title}}</option>
+    <main>
+      <h1>Categories</h1>
+      <div>
+        <button 
+          v-for="category in categories" 
+          :key="category.slug.current"
+          @click="selectCategory = category.slug.current">
+          {{ category.title }}
+        </button>
+      </div>
 
-    </select>
-    <h1>{{ filter }}</h1>
-    <nav>
-      <ul>
-        <li v-for="post in filter === '' ? posts : filteredPosts" :key="post._id">
-          <div v-if="post.category" class="Sanity__category_container"><pre>{{ post.category.title }}</pre></div>
-          <NuxtLink :to="`/blog/${post.slug.current}`"><h3>{{ post.title }}</h3></NuxtLink>
-        </li>
-      </ul>
-    </nav>
+      <h1>Posts</h1>
+      <div v-for="post in posts" :key="post._id">
+        <div>
+          <NuxtLink :to="`/${post.slug.current}`">
+            <h2 class="text-xl font-semibold">{{ post.title }}</h2>
+            <p>{{ new Date(post.publishedAt).toLocaleDateString() }}</p>
+            <div v-if="post.category">
+  <p>{{ post.category.title }}</p>
+</div>
+            <img v-if="post.image" :src="urlFor(post.image)?.width(200).height(200).url()">
+          </NuxtLink>
+        </div>
+      </div>
+      <div>
+        <button v-for="i in 5" :key="i" @click="onPageClick(i)">
+          {{ i }}
+        </button>
+      </div>
+    </main>
   </div>
 </template>
-
-<style lang="scss">
-.Sanity__category_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f0f0f0;
-  border: black solid .3px;
-  width: fit-content;
-  padding-inline: 2rem;
-  border-radius: 0.5rem;
-
-
-}
-</style>
