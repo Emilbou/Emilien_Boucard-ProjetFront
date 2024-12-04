@@ -10,7 +10,10 @@ const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
 </script>
 
 <template>
- <div>
+  <div>
+  <CustomTable/>
+<CardsContainer/>
+
     {{ posts }}
  </div>
 </template>
