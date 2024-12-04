@@ -55,6 +55,13 @@ const { data: totalPosts } = await useSanityQuery<number>(groq`count(*[
 const totalPages = computed(() => 
  totalPosts?.value ? Math.ceil(totalPosts.value / postsPerPage) : 0
 )
+
+useSeoMeta({
+  title:"Blog | liste des différents blogs",
+  description: "Description de la page blog",
+  ogTitle: "Blog | liste des différents blogs",
+  ogDescription: "Description de la page blog",
+})
 </script>
 
 <template>
