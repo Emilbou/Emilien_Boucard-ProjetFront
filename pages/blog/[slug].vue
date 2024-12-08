@@ -18,6 +18,7 @@ if (!post.value) {
 }
 
 //réutiliser ca partout pour le seo
+//penser a faire la passerelle avec le groupe seo de sanity et faire un composable pour le faire partout 
 useSeoMeta({
   title:"Blog | " + post.value.title,
   description: post.value.description,
