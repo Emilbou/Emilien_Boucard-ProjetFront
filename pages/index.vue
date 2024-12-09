@@ -64,6 +64,9 @@ useSeoMeta({
 
 <template>
   <div  v-if="post">
+    <h1>{{ post[0].titrePrincipal }}</h1>
+    <h3 class="homepage__h3">{{ post[0].sectionAccueil.texteDescription }}</h3>
+    <pre>{{ post[0].sectionAccueil.titrePrincipal }}</pre>
   <!-- <CustomTable :table-array="tableArray"/>
 <CardsContainer/>
  -->
@@ -72,3 +75,13 @@ useSeoMeta({
 <GlobalFeatures :post="post"/>
  </div>
 </template>
+
+<style lang="scss">
+.homepage__h3 {
+  color: $primaryColor;
+  font-size: 20px;
+  font-weight: 300;
+  margin: 20px 0;
+  text-wrap-style: balance;
+}
+</style>

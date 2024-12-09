@@ -3,3 +3,14 @@
 @use 'foundations/variables';
 @use 'foundations/functions';
 @use 'foundations/mixins';
+@font-face {
+    font-family: 'Gazpacho';
+    src: url(../font/Gazpacho.ttf);
+}
+
+h1, h2 {
+    font-family: 'Gazpacho';
+    color: $primaryColor;
+    font-size: clamp(3rem, 7vw, 5rem);
+    text-decoration: solid $primaryColor underline;
+}

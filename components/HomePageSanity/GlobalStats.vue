@@ -8,9 +8,9 @@ defineProps({
 </script>
 
 <template>
-    <div v-if="post" class="SanityArray">
-        <div  v-for="stat in post[0].sectionAccueil.statistiques" :key="stat._key" class="SanityArray__container">
-            <div class="SanityArray__layout"><span>{{ stat.valeur }}</span> <span>{{ stat.texteExplicatif }}</span></div>
+    <div v-if="post" class="GlobalStats">
+        <div  v-for="stat in post[0].sectionAccueil.statistiques" :key="stat._key" class="GlobalStats__container">
+            <div class="GlobalStats__layout"><span>{{ stat.valeur }}</span> <span>{{ stat.texteExplicatif }}</span></div>
         </div>
         <!-- <pre>
             {{ post }}
@@ -19,11 +19,12 @@ defineProps({
 </template>
 
 <style lang="scss">
-.SanityArray {
+.GlobalStats {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
+    color: $primaryColor;
     &__container {
         display: flex;
         align-items: center;
@@ -37,6 +38,7 @@ span {
     &:first-child {
         font-size: 40px;
         font-weight: bold;
+        line-height: 1;
     }
     &:last-child {
         font-size: 20px;
