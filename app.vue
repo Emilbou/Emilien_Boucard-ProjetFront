@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main-app">
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -7,6 +7,9 @@
 </template>
 
 <style lang="scss">
+.main-app {
+background-color: $backgroundColor;
+}
 .page-enter-active,
 .page-leave-active {
   transition: all 0.3s;

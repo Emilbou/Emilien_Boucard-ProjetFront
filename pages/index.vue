@@ -64,19 +64,26 @@ useSeoMeta({
 
 <template>
   <div  v-if="post">
-    <h1>{{ post[0].titrePrincipal }}</h1>
-    <h3 class="homepage__h3">{{ post[0].sectionAccueil.texteDescription }}</h3>
-    <pre>{{ post[0].sectionAccueil.titrePrincipal }}</pre>
-  <!-- <CustomTable :table-array="tableArray"/>
-<CardsContainer/>
- -->
+ 
+      <Highlight>
+        
+        <h1>{{ post[0].titrePrincipal }}</h1>
+        <h3 class="homepage__h3">{{ post[0].sectionAccueil.texteDescription }}</h3>
+      </Highlight>
 
-<GlobalStats :post="post"/>
-<GlobalFeatures :post="post"/>
+
+    <!-- <pre>{{ post[0].sectionAccueil.titrePrincipal }}</pre> -->
+
+<GlobalStats class="homepage__GlobalStats" :post="post"/>
+<GlobalFeatures class="homepage__GlobalFeatures" :post="post"/>
  </div>
 </template>
 
 <style lang="scss">
+body {
+
+  background-color: #F7F6F2;
+}
 .homepage__h3 {
   color: $primaryColor;
   font-size: 20px;
@@ -84,4 +91,13 @@ useSeoMeta({
   margin: 20px 0;
   text-wrap-style: balance;
 }
+.homepage__GlobalStats{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.homepage__GlobalFeatures{
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 </style>
