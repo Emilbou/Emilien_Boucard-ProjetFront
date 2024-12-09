@@ -27,8 +27,17 @@ const {urlFor} = useSanityImage();
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    gap: 30px;
+    @media screen and (max-width: 800px){
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+      
+        
+    }
     &__container{
-        max-width: 25%;
+        width: 60%;
         display: flex;
         flex-direction: column;
         flex: 1;

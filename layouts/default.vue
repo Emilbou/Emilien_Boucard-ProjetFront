@@ -6,6 +6,6 @@
 
 <style lang="scss">
 .layout-default {
-    padding-inline: 5%;
+    padding-inline: 50px;
 }
 </style>

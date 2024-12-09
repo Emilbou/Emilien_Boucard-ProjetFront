@@ -30,6 +30,12 @@ defineProps({
   width: 100%;
   justify-content: space-evenly;
   color: $primaryColor;
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
   &__container {
     display: flex;
     align-items: center;

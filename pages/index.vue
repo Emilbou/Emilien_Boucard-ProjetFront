@@ -67,15 +67,18 @@ useSeoMeta({
  
       <Highlight>
         
-        <h1>{{ post[0].titrePrincipal }}</h1>
+        <h1 class="homepage__h1">{{ post[0].titrePrincipal }}</h1>
         <h3 class="homepage__h3">{{ post[0].sectionAccueil.texteDescription }}</h3>
+        <GlobalStats class="homepage__GlobalStats" :post="post"/>
       </Highlight>
 
 
     <!-- <pre>{{ post[0].sectionAccueil.titrePrincipal }}</pre> -->
 
-<GlobalStats class="homepage__GlobalStats" :post="post"/>
-<GlobalFeatures class="homepage__GlobalFeatures" :post="post"/>
+<Highlight>
+  <GlobalFeatures class="homepage__GlobalFeatures" :post="post"/>
+</Highlight>
+
  </div>
 </template>
 
@@ -83,6 +86,10 @@ useSeoMeta({
 body {
 
   background-color: #F7F6F2;
+}
+.homepage__h1 {
+  line-height: 1;
+  text-decoration: underline
 }
 .homepage__h3 {
   color: $primaryColor;

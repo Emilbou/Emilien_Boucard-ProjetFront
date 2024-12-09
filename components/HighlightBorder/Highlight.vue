@@ -6,9 +6,10 @@
 <style lang="scss">
 .highlight-thinBorder {
   border: solid $primaryColor 0.1px;
-  margin: 20px;
+  margin-top: 5%;
+  margin-bottom: 20px;
+  margin-inline: 5%;
   padding: 20px;
 border-radius: 50px;
-width: fit-content
 }
 </style>
