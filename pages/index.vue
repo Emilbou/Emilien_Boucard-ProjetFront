@@ -41,12 +41,12 @@ const tableArray = [
 ]
 
 
-const POSTS_QUERY = groq`*[
-  _type == "post"
-  && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
+// const POSTS_QUERY = groq`*[
+//   _type == "post"
+//   && defined(slug.current)
+// ]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt}`;
 
-const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
+// const { data: posts } = await useSanityQuery<SanityDocument[]>(POSTS_QUERY);
 
 useSeoMeta({
   title:"Page accueil",
@@ -61,6 +61,8 @@ useSeoMeta({
   <CustomTable :table-array="tableArray"/>
 <CardsContainer/>
 
-    {{ posts }}
+
+<SanityArray />
+
  </div>
 </template>

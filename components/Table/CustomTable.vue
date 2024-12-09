@@ -6,7 +6,7 @@ defineProps<{
 <template>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=cancel,task_alt" rel="stylesheet">
     <table class="table">
-        <thead>
+        <thead class="table__head">
             <tr>
             <td>Date</td>
             <td>Statut</td>
@@ -15,9 +15,9 @@ defineProps<{
         </thead>
         <tbody>
                 <tr v-for="item in tableArray" :key="item.index">
-                    <th>{{item.date}}</th>
-                    <th><span class="material-symbols-outlined">{{ item.statut ? "&#xe2e6;" : "&#xe5c9;" }}</span> {{item.statut ? "Terminé" : "Non terminé"}}</th>
-                    <th>{{ item.dateEnregistrement }}</th>
+                    <th class="table__item">{{item.date}}</th>
+                    <th class="table__item"><span class="material-symbols-outlined">{{ item.statut ? "&#xe2e6;" : "&#xe5c9;" }}</span> {{item.statut ? "Terminé" : "Non terminé"}}</th>
+                    <th class="table__item">{{ item.dateEnregistrement }}</th>
                 </tr>
         </tbody>
     </table>
@@ -30,9 +30,24 @@ defineProps<{
     width: 100%;
     border: solid 1px black;
     border-radius: 5px;
-}
-.table * {
-    border: solid 1px black;
-    border-radius: 5px;
+    .table__head {
+        tr {
+        border: solid 1px black;
+    }
+    }
+    .table__item     {
+        vertical-align: middle;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        .material-symbols-outlined {
+            color: $primaryColor;
+        }
+        &:has(span) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
 }
 </style>
