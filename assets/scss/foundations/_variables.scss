@@ -9,12 +9,10 @@ $darkestColor: #090a0a;
 $successColor: #00c851;
 $errorColor: #ff5247;
 $warningColor: #ffab00;
+$tonicColors: (
+  'Orange': #ff7846,
+  'Bleu' :#4285f4,
+  'Violet' : #6b4eff,
+)
 
-$colors: (
-  'red': rgb(133, 13, 13),
-  'green': rgb(56, 184, 56),
-  'blue': rgb(60, 60, 218),
-);
 
-// Fonts
-$fontTextFamily: 'Inter', sans-serif;

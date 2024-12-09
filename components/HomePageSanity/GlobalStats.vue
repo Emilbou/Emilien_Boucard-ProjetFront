@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { SanityDocument } from "@sanity/client";
-
-const POST_QUERY = groq`*[_type == 'homepage']`;
-
-const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY);
-console.log(post);
+defineProps({
+    post: {
+        type: Object,
+        default: () => ({})
+    }
+})
 </script>
 
 <template>

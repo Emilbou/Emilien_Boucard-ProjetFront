@@ -1,5 +1,11 @@
 <script setup lang="ts">
 // import type { SanityDocument } from "@sanity/client";
+import type { SanityDocument } from "@sanity/client";
+
+const POST_QUERY = groq`*[_type == 'homepage']`;
+
+const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY);
+console.log(post);
 
 // const tableArray = [
 //   {
@@ -57,12 +63,12 @@ useSeoMeta({
 </script>
 
 <template>
-  <div>
+  <div  v-if="post">
   <!-- <CustomTable :table-array="tableArray"/>
 <CardsContainer/>
  -->
 
-<SanityArray />
-
+<GlobalStats :post="post"/>
+<GlobalFeatures :post="post"/>
  </div>
 </template>
