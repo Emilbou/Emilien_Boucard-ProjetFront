@@ -8,5 +8,5 @@ useSeoMeta({
 })
 </script>
 <template>
-    <LoginForm :text-log="'Se connecter'" :text-swap="'Pas encore de compte ?'" :url-swap="'/inscription'"/>
+    <LoginForm :text-log="'Se connecter'" :text-swap="'Pas encore de compte ?'" :url-swap="'/inscription'" action="login"/>
 </template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-defineProps({
+const props = defineProps({
   textLog: {
     type: String,
     default: 'Se connecter',
@@ -13,21 +13,47 @@ defineProps({
     type: String,
     default: '/register',
   },
+  action: {
+    type: String,
+    default: 'register',
+  }
 })
+
+const username = ref('')
+const password = ref('')
+
+async function onSubmit (event: Event) {
+  event.preventDefault()
+  const response = await fetch(`http://localhost:4000/auth/${props.action}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: username.value,
+      password: password.value,
+    }),
+  })
+const data = await response.json()
+const cookieJwt = useCookie('api_tracking_jwt')
+cookieJwt.value = data.token
+}
+
+
 </script>
 <template>
-  <div class="Login">
+  
+  <form class="Login" @submit="onSubmit" >
     <div class="Login__layout">
       <h1 class="Login__Title">{{ textLog }}</h1>
-
-      <MyInput placeholder="Nom d'utilisateur" />
-      <MyInput placeholder="Mot de passe" />
+      <MyInput v-model="username" placeholder="Nom d'utilisateur" />
+      <MyInput v-model="password" placeholder="Mot de passe" />
       <div class="Login__buttonContainer">
         <NuxtLink class="Login_SwapText" :to="urlSwap">{{ textSwap }}</NuxtLink>
         <MyButton :disabled="false" class="Login__button">></MyButton>
       </div>
     </div>
-  </div>
+  </form>
 </template>
 <style lang="scss">
 .Login {
