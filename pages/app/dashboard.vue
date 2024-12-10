@@ -17,9 +17,7 @@ interface DashboardResponse {
     success_rate: number;
   }>;
 }
-
 const response = ref<DashboardResponse | null>(null);
-
 onMounted(async () => {
   const res = await fetch(`http://localhost:4000/dashboard`, {
     method: "GET",
@@ -30,6 +28,27 @@ onMounted(async () => {
   });
   response.value = await res.json();
 });
+
+const AddHabitTitre = ref("");
+const AddHabitDesc = ref("");
+
+function AddHabit(event: Event) {
+  event.preventDefault();
+  const createHabit = fetch(`http://localhost:4000/habits`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "authorization": `Bearer ${useCookie("api_tracking_jwt").value}`
+    },
+    body: JSON.stringify({
+      title: AddHabitTitre.value,
+      description: AddHabitDesc.value,
+    }),
+  });
+  console.log(createHabit);
+  
+  console.log("add habit");
+}
 </script>
 
 <template>
@@ -37,5 +56,11 @@ onMounted(async () => {
 
 <CardsContainer v-if="response" :response="response"/>
     <pre>{{ response }}</pre>
+
+    <form style="display: flex; flex-direction: column;" @submit="AddHabit" >
+        <input v-model="AddHabitTitre" type="text">
+        <input v-model="AddHabitDesc" type="text">
+<button>submit</button>
+    </form>
   </div>
 </template>

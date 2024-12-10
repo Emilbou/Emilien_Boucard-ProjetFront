@@ -31,7 +31,7 @@ defineProps({
 })
 </script>
 <template>
-  <div class="CardHabit">
+  <form class="CardHabit">
     <h2 class="CardHabit__Title">{{ titre }}</h2>
     <h3>{{ description }}</h3>
     <div>
@@ -45,10 +45,10 @@ defineProps({
       <VueDatePicker v-model="date" :enable-time-picker="false"/>
       <CheckBox />
     </div>
-        <MyButton :disabled="false">Ajouter</MyButton>
+        <MyButton :disabled="false" onclick="">Ajouter</MyButton>
         <MyButton class="CardHabit__Button" :disabled="false">Voir l'historique</MyButton>
     </div>
-  </div>
+</form>
 </template>
 
 <style lang="scss">
