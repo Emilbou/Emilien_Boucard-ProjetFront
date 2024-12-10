@@ -15,6 +15,12 @@ css: ['@/assets/scss/main.scss'],
     dataset: "production",
   },
 
+  runtimeConfig: {
+    public: {
+      apiTrackingBaseUrl: '',
+    }
+  },
+
 
 components: [
   {

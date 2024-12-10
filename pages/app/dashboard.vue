@@ -46,6 +46,8 @@ useTrackingApi('habits', { method: 'POST', body: { title : AddHabitTitre.value, 
     console.error('Erreur lors de l\'ajout de l\'habitude:', error);
   }
 }
+
+const config = useRuntimeConfig()
 </script>
 
 <template>
@@ -69,5 +71,7 @@ useTrackingApi('habits', { method: 'POST', body: { title : AddHabitTitre.value, 
     <NuxtLink to="/app/tracking/9">jjjjjj</NuxtLink>
     <NuxtLink to="/app/tracking/10">jjjjjj</NuxtLink>
     <NuxtLink to="/app/tracking/11">jjjjjj</NuxtLink>
+
+{{ config.public }}
   </div>
 </template>
