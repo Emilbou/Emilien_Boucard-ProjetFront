@@ -1,29 +1,29 @@
 <script setup lang="ts">
-
 const props = defineProps({
   textLog: {
     type: String,
-    default: 'Se connecter',
+    default: "Se connecter",
   },
   textSwap: {
     type: String,
-    default: 'Pas de compte ?',
+    default: "Pas de compte ?",
   },
   urlSwap: {
     type: String,
-    default: '/register',
+    default: "/register",
   },
   action: {
     type: String,
-    default: 'register',
-  }
-})
+    default: "register",
+  },
+});
 
-const username = ref('')
-const password = ref('')
+const username = ref("");
+const password = ref("");
+const router = useRouter();
 
-async function onSubmit (event: Event) {
-  event.preventDefault()
+async function onSubmit(event: Event) {
+  event.preventDefault();
   const response = await fetch(`http://localhost:4000/auth/${props.action}`, {
     method: "POST",
     headers: {
@@ -33,17 +33,19 @@ async function onSubmit (event: Event) {
       username: username.value,
       password: password.value,
     }),
-  })
-const data = await response.json()
-const cookieJwt = useCookie('api_tracking_jwt')
-cookieJwt.value = data.token
+  });
+  if (response.ok) {
+    const data = await response.json();
+    const cookieJwt = useCookie("api_tracking_jwt");
+    cookieJwt.value = data.token;
+    await router.push("/app/dashboard");
+  } else {
+    alert("Error");
+  }
 }
-
-
 </script>
 <template>
-  
-  <form class="Login" @submit="onSubmit" >
+  <form class="Login" @submit="onSubmit">
     <div class="Login__layout">
       <h1 class="Login__Title">{{ textLog }}</h1>
       <MyInput v-model="username" placeholder="Nom d'utilisateur" />
