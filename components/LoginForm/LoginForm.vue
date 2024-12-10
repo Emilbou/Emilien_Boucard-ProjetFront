@@ -20,6 +20,7 @@ const props = defineProps({
 
 const username = ref("");
 const password = ref("");
+const isError = ref(false);
 const router = useRouter();
 
 async function onSubmit(event: Event) {
@@ -40,7 +41,7 @@ async function onSubmit(event: Event) {
     cookieJwt.value = data.token;
     await router.push("/app/dashboard");
   } else {
-    alert("Error");
+    isError.value = true;
   }
 }
 </script>
@@ -48,8 +49,9 @@ async function onSubmit(event: Event) {
   <form class="Login" @submit="onSubmit">
     <div class="Login__layout">
       <h1 class="Login__Title">{{ textLog }}</h1>
-      <MyInput v-model="username" placeholder="Nom d'utilisateur" />
-      <MyInput v-model="password" placeholder="Mot de passe" />
+        <p class="Login__Error" :style="(isError ? 'height : 50px' : '')">{{ isError }}</p>
+      <MyInput v-model="username" :error="isError" placeholder="Nom d'utilisateur" />
+      <MyInput v-model="password" :error="isError" placeholder="Mot de passe" />
       <div class="Login__buttonContainer">
         <NuxtLink class="Login_SwapText" :to="urlSwap">{{ textSwap }}</NuxtLink>
         <MyButton :disabled="false" class="Login__button">></MyButton>
@@ -57,6 +59,7 @@ async function onSubmit(event: Event) {
     </div>
   </form>
 </template>
+
 <style lang="scss">
 .Login {
   display: flex;
@@ -64,6 +67,7 @@ async function onSubmit(event: Event) {
   justify-content: center;
   height: 100svh;
   width: 100vw;
+  transition: all 0.5s; 
   &__Title {
     color: $primaryColor;
     font-size: 3rem;
@@ -94,6 +98,21 @@ async function onSubmit(event: Event) {
     display: flex;
     flex-direction: column;
     padding-inline: 20%;
+
+    .Login__Error {
+      height: 0;
+      overflow: hidden;
+      transition: all 0.5s;
+    }
   }
+}
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
