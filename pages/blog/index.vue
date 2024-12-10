@@ -55,6 +55,13 @@ const { data: totalPosts } = await useSanityQuery<number>(groq`count(*[
 const totalPages = computed(() => 
  totalPosts?.value ? Math.ceil(totalPosts.value / postsPerPage) : 0
 )
+
+useSeoMeta({
+  title:"Blog | liste des différents blogs",
+  description: "Description de la page blog",
+  ogTitle: "Blog | liste des différents blogs",
+  ogDescription: "Description de la page blog",
+})
 </script>
 
 <template>
@@ -73,7 +80,7 @@ const totalPages = computed(() =>
    <h1>Posts</h1>
    <div v-if="posts?.length">
      <div v-for="post in posts" :key="post._id">
-       <NuxtLink :to="`/${post.slug.current}`">
+       <NuxtLink :to="`/blog/${post.slug.current}`">
          <h2>{{ post.title }}</h2>
          <p>{{ new Date(post.publishedAt).toLocaleDateString() }}</p>
          <p v-if="post.category">{{ post.category.title }}</p>
