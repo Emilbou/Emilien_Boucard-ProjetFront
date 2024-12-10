@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useAsyncData } from '#app'
+
 interface DashboardResponse {
   globalHabits: Array<{
     id: number;
@@ -21,34 +23,19 @@ interface DashboardResponse {
 const AddHabitTitre = ref("");
 const AddHabitDesc = ref("");
 
-// récup toute les données possible
-const { data: response, refresh } = await useAsyncData<DashboardResponse>('dashboard', async () => {
-  const res = await fetch(`http://localhost:4000/dashboard`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${useCookie("api_tracking_jwt").value}`,
-    },
-  });
-  return res.json();
-});
+// Utilisation de useAsyncData avec le composable
+const { data: response, refresh } = await useAsyncData<DashboardResponse>(
+  'dashboard', 
+  () => useTrackingApi('dashboard', { method: 'GET' })
+);
 
-// post pour nouvelle habitude, a bouger après création d'un composant dédié
+// post pour nouvelle habitude
 async function AddHabit(event: Event) {
   event.preventDefault();
   
   try {
-    await fetch(`http://localhost:4000/habits`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "authorization": `Bearer ${useCookie("api_tracking_jwt").value}`
-      },
-      body: JSON.stringify({
-        title: AddHabitTitre.value,
-        description: AddHabitDesc.value,
-      }),
-    });
+useTrackingApi('habits', { method: 'POST', body: { title : AddHabitTitre.value, description : AddHabitDesc.value } }); 
+
     
     AddHabitTitre.value = "";
     AddHabitDesc.value = "";
@@ -59,7 +46,6 @@ async function AddHabit(event: Event) {
     console.error('Erreur lors de l\'ajout de l\'habitude:', error);
   }
 }
-
 </script>
 
 <template>
