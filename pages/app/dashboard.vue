@@ -47,12 +47,14 @@ useTrackingApi('habits', { method: 'POST', body: { title : AddHabitTitre.value, 
   }
 }
 
-const config = useRuntimeConfig()
+async function updatedata() {
+  await refresh();
+}
 </script>
 
 <template>
   <div>
-    <CardsContainer v-if="response" :response="response" />
+    <CardsContainer v-if="response" :response="response" @updatedata-parent="updatedata" />
     <pre>{{ response }}</pre>
 
     <form style="display: flex; flex-direction: column;" @submit="AddHabit">

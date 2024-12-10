@@ -45,6 +45,12 @@ const expandToggle = ref(false)
 //   console.log(id)
   
 // }
+
+const emit = defineEmits(["updatedata-parent"]);
+
+const handleUpdateData = () => {
+  emit('updatedata-parent');
+}
 </script>
 
 <template>
@@ -60,6 +66,7 @@ const expandToggle = ref(false)
         :total-attempts="item.total_attempts"
         :description="truncateDescriptions(item.description)"
         :lien="item.id.toString()"
+        @updatedata="handleUpdateData"
       />
     </TransitionGroup>
   <ExpandableButton 
