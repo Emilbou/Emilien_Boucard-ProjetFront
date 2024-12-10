@@ -2,36 +2,64 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
-const date = ref()
-defineProps({
-  progress: {
-    type: Number,
-    default: 50,
-  },
-  todayUsers: {
-    type: Number,
+const props = defineProps({
+    progress: {
+        type: Number,
+        default: 50,
+    },
+    todayUsers: {
+        type: Number,
     default: 0,
   },
   monthlyUsers: {
     type: Number,
     default: 0,
-  },
-  totalAttempts: {
+},
+totalAttempts: {
     type: Number,
     default: 0,
-  },
-  description: {
+},
+description: {
     type: String,
     default: 'description',
-  },
-  titre: {
+},
+titre: {
     type: String,
     default: 'Titre',
-  },
+},
+idhabit: {
+    type: Number,
+    default: 0,
+},
 })
+
+// PUT pour mettre a jour des données 
+const date = ref()
+const check = ref()
+
+async function SaveHabit(event: Event) {
+    event.preventDefault();
+    const response = await fetch(`http://localhost:4000/tracking/${props.idhabit}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        "authorization": `Bearer ${useCookie("api_tracking_jwt").value}`
+      },
+      body: JSON.stringify({
+        date: date.value,
+        completed: check.value,
+      }),
+    })
+    console.log(response)
+    console.log(JSON.stringify({
+        date: date.value,
+        completed: check.value,
+      }),);
+    
+}
 </script>
 <template>
-  <form class="CardHabit">
+  <form class="CardHabit" @submit="SaveHabit" >
     <h2 class="CardHabit__Title">{{ titre }}</h2>
     <h3>{{ description }}</h3>
     <div>
@@ -42,10 +70,14 @@ defineProps({
     <li>Participants totaux : {{ totalAttempts }}</li>
   </ul>
     <div class="CardHabit__dateSection">
-      <VueDatePicker v-model="date" :enable-time-picker="false"/>
-      <CheckBox />
+        <VueDatePicker 
+        v-model="date" 
+        :enable-time-picker="false"
+        model-type="yyyy-MM-dd"
+      />
+      <CheckBox v-model="check" />
     </div>
-        <MyButton :disabled="false" onclick="">Ajouter</MyButton>
+        <MyButton type="submit" :disabled="false" onclick="">Ajouter</MyButton>
         <MyButton class="CardHabit__Button" :disabled="false">Voir l'historique</MyButton>
     </div>
 </form>

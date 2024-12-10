@@ -21,6 +21,7 @@ interface DashboardResponse {
 const AddHabitTitre = ref("");
 const AddHabitDesc = ref("");
 
+// récup toute les données possible
 const { data: response, refresh } = await useAsyncData<DashboardResponse>('dashboard', async () => {
   const res = await fetch(`http://localhost:4000/dashboard`, {
     method: "GET",
@@ -32,6 +33,7 @@ const { data: response, refresh } = await useAsyncData<DashboardResponse>('dashb
   return res.json();
 });
 
+// post pour nouvelle habitude, a bouger après création d'un composant dédié
 async function AddHabit(event: Event) {
   event.preventDefault();
   
@@ -50,13 +52,14 @@ async function AddHabit(event: Event) {
     
     AddHabitTitre.value = "";
     AddHabitDesc.value = "";
-                                                                                        
+
     await refresh();
     
   } catch (error) {
     console.error('Erreur lors de l\'ajout de l\'habitude:', error);
   }
 }
+
 </script>
 
 <template>

@@ -48,6 +48,7 @@ const expandToggle = ref(false)
       <Card
         v-for="item in response?.globalHabits"
         :key="item.id"
+        :idhabit="item.id"
         :progress="item.success_rate"
         :titre="item.title"
         :monthly-users="item.monthly_users"
