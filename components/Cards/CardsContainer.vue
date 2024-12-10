@@ -23,16 +23,16 @@ defineProps({
     type: Object as PropType<DashboardResponse>,
     default: null,
   },
-})
+});
 
 const truncateDescriptions = (description: string) => {
-  console.log(description)
+  console.log(description);
   if (description.length > 50) {
-    return description.substring(0, 50) + '...'
+    return description.substring(0, 50) + "...";
   } else {
-    return description
+    return description;
   }
-}
+};
 
 // const truncateCards = (cards) => {
 //   if (cards.value.length > 4) {
@@ -40,39 +40,39 @@ const truncateDescriptions = (description: string) => {
 //   }
 //   return cards.value
 // }
-const expandToggle = ref(false)
+// const expandToggle = ref(false)
 // function goLink(id: string) {
 //   console.log(id)
-  
+
 // }
 
 const emit = defineEmits(["updatedata-parent"]);
 
 const handleUpdateData = () => {
-  emit('updatedata-parent');
-}
+  emit("updatedata-parent");
+};
 </script>
 
 <template>
-    <TransitionGroup name="list" tag="div" class="CardsContainer">
-      <Card
-        v-for="item in response?.globalHabits"
-        :key="item.id"
-        :idhabit="item.id"
-        :progress="item.success_rate"
-        :titre="item.title"
-        :monthly-users="item.monthly_users"
-        :today-users="item.today_users"
-        :total-attempts="item.total_attempts"
-        :description="truncateDescriptions(item.description)"
-        :lien="item.id.toString()"
-        @updatedata="handleUpdateData"
-      />
-    </TransitionGroup>
-  <ExpandableButton 
+  <TransitionGroup name="list" tag="div" class="CardsContainer">
+    <Card
+      v-for="item in response?.globalHabits"
+      :key="item.id"
+      :idhabit="item.id"
+      :progress="item.success_rate"
+      :titre="item.title"
+      :monthly-users="item.monthly_users"
+      :today-users="item.today_users"
+      :total-attempts="item.total_attempts"
+      :description="truncateDescriptions(item.description)"
+      :lien="item.id.toString()"
+      @updatedata="handleUpdateData"
+    />
+  </TransitionGroup>
+  <!-- <ExpandableButton 
   
       :toggle-props="expandToggle"
-  @toggle-expand="expandToggle = !expandToggle" />
+  @toggle-expand="expandToggle = !expandToggle" /> -->
 </template>
 
 <style lang="scss">

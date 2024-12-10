@@ -49,8 +49,8 @@ async function SaveHabit(event: Event) {
     method: "POST",
     body: { date: date.value, completed: check.value },
   });
-  date.value = ref();
-  check.value = ref();
+  date.value = ref("");
+  check.value = ref(false);
   emit("updatedata");
 }
 </script>
@@ -86,7 +86,7 @@ async function SaveHabit(event: Event) {
 <style lang="scss">
 .CardHabit {
   border: 0.25px solid $gray800;
-  border-radius: 5px;
+  border-radius: 20px;
   padding: 1rem;
   display: flex;
   flex-direction: column;
