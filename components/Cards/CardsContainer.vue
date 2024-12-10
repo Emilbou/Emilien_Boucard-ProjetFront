@@ -41,6 +41,10 @@ const truncateDescriptions = (description: string) => {
 //   return cards.value
 // }
 const expandToggle = ref(false)
+// function goLink(id: string) {
+//   console.log(id)
+  
+// }
 </script>
 
 <template>
@@ -55,6 +59,7 @@ const expandToggle = ref(false)
         :today-users="item.today_users"
         :total-attempts="item.total_attempts"
         :description="truncateDescriptions(item.description)"
+        :lien="item.id.toString()"
       />
     </TransitionGroup>
   <ExpandableButton 

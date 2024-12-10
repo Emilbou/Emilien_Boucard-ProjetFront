@@ -6,6 +6,7 @@ defineProps<{
 </script>
 
 <template>
+  
   <button
     :class="{
       button: true,

@@ -2,6 +2,10 @@
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 
+defineEmits(
+  ['goLink']
+)
+// mes 1 milliard de props avec des valeurs par défauts
 const props = defineProps({
     progress: {
         type: Number,
@@ -31,6 +35,10 @@ idhabit: {
     type: Number,
     default: 0,
 },
+lien : {
+  type: String,
+  default: "0",
+}
 })
 
 // PUT pour mettre a jour des données 
@@ -78,7 +86,11 @@ async function SaveHabit(event: Event) {
       <CheckBox v-model="check" />
     </div>
         <MyButton type="submit" :disabled="false" onclick="">Ajouter</MyButton>
-        <MyButton class="CardHabit__Button" :disabled="false">Voir l'historique</MyButton>
+        <NuxtLink :to="`/app/tracking/${lien}`">
+          
+          <MyButton class="CardHabit__Button" :disabled="false" @click="$emit('goLink')">Voir l'historique</MyButton>
+          
+        </NuxtLink>
     </div>
 </form>
 </template>

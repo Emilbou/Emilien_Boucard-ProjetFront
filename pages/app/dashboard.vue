@@ -60,18 +60,6 @@ const config = useRuntimeConfig()
       <input v-model="AddHabitDesc" type="text">
       <button>submit</button>
     </form>
-    <NuxtLink to="/app/tracking/1">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/2">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/3">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/4">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/5">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/6">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/7">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/8">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/9">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/10">jjjjjj</NuxtLink>
-    <NuxtLink to="/app/tracking/11">jjjjjj</NuxtLink>
 
-{{ config.public }}
   </div>
 </template>
