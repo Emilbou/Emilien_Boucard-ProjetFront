@@ -62,23 +62,23 @@ defineEmits<{
   background: white;
 
   &:focus {
-    border: $primaryColor solid 2px !important;
+    border: $primaryColor solid 2px ;
     outline: none;
   }
 
   &:active {
-    border: $primaryColor solid 2px !important;
+    border: $primaryColor solid 2px ;
   }
 
   &.-outline {
     color: $primaryColor;
 
     &:focus {
-      border: $primaryColor solid 2px !important;
+      border: $primaryColor solid 2px ;
     }
 
     &:active {
-      border: $primaryColor solid 2px !important;
+      border: $primaryColor solid 2px ;
     }
 
     &.-disabled {

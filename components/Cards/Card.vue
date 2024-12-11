@@ -3,7 +3,7 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
 const emit = defineEmits(["updatedata"]);
-// mes 1 milliard de props avec des valeurs par défauts
+
 const props = defineProps({
   progress: {
     type: Number,
@@ -43,7 +43,7 @@ const props = defineProps({
   },
 });
 
-// PUT pour mettre a jour des données
+
 const date = ref();
 const check = ref();
 
@@ -57,13 +57,27 @@ async function SaveHabit(event: Event) {
   check.value = ref(false);
   emit("updatedata");
 }
+
+async function DeleteHabit(event: Event) {
+  event.preventDefault();
+  useTrackingApi(`habits/${props.idhabit}`, {
+    method: "DELETE",
+  });
+  emit("updatedata");
+}
+
+
 const cardHeight = computed(() => {
   return props.isglobal === 0 ? "fit-content" : "auto";
 });
+
 </script>
 <template>
   <form class="CardHabit" @submit="SaveHabit">
-    <h2 class="CardHabit__Title">{{ titre }}</h2>
+    <div class="CardHabit__deletelayout">
+      <h2 class="CardHabit__Title">{{ titre }}</h2>
+      <MyButton v-if="props.isglobal === 0 ? true : false" class="CardHabit__delete-button" :disabled="false" @click="DeleteHabit">X</MyButton>
+    </div>
     <h3>{{ description }}</h3>
     <div>
       <ProgressBarTitle v-if="props.isglobal === 1 ? true : false" :progress="progress" />
@@ -99,12 +113,36 @@ const cardHeight = computed(() => {
   height: v-bind(cardHeight);
   flex-direction: column;
   justify-content: space-between;
-  .CardHabit__Title {
-    color: $primaryColor;
-    font-size: 2rem;
-    margin-bottom: 0;
-    margin-top: 0;
-    text-transform: uppercase;
+  background-color: white;
+
+  .CardHabit__deletelayout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: fit-content;
+    flex-wrap: nowrap;
+    gap: 1rem; 
+    
+    .CardHabit__delete-button {
+      margin: 0;
+      aspect-ratio: 1;
+      width: fit-content;
+      flex-shrink: 0; 
+      line-height: 0;
+      padding: 1rem;
+    }
+    
+    .CardHabit__Title {
+      color: $primaryColor;
+      font-size: 2rem;
+      margin-bottom: 0;
+      margin-top: 0;
+      text-transform: uppercase;
+      overflow: hidden; 
+      text-overflow: ellipsis; 
+      min-width: 0; 
+      flex: 1; 
+    }
   }
 
   .CardHabit__dateSection {
