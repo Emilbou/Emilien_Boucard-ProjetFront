@@ -52,6 +52,8 @@ const handleUpdateData = () => {
       :description="truncateDescriptions(item.description)"
       :lien="item.id.toString()"
       :isglobal="item.is_global"
+      :titrevalue="item.title"
+      :descvalue="item.description"
       @updatedata="handleUpdateData"
     />
   </TransitionGroup>

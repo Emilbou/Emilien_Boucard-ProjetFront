@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
+const cardHeight = computed(() => {
+  return props.isglobal === 0 ? "fit-content" : "auto";
+});
 
 const emit = defineEmits(["updatedata"]);
 
@@ -41,11 +44,22 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  titrevalue: {
+    type: String,
+    default: "Titre",
+  },
+  descvalue: {
+    type: String,
+    default: "Description",
+  },
 });
-
 
 const date = ref();
 const check = ref();
+const update = ref(false)
+const toggleUpdate = () => {
+  update.value = !update.value
+}
 
 // je créer
 async function SaveHabit(event: Event) {
@@ -59,7 +73,7 @@ async function SaveHabit(event: Event) {
   emit("updatedata");
 }
 
-// je supprime 
+// je supprime
 async function DeleteHabit(event: Event) {
   event.preventDefault();
   useTrackingApi(`habits/${props.idhabit}`, {
@@ -69,58 +83,96 @@ async function DeleteHabit(event: Event) {
 }
 
 // je modifie
-async function UpdateHabit(event: Event) {
-  event.preventDefault();
-  useTrackingApi(`habits/${props.idhabit}`, {
-    method: "PUT",
-    body: { title: "modification titre", description: "modification desc" },
-  });
-  emit("updatedata");
-}
-
-const cardHeight = computed(() => {
-  return props.isglobal === 0 ? "fit-content" : "auto";
-});
-
+// async function UpdateHabit(event: Event) {
+//   event.preventDefault();
+//   useTrackingApi(`habits/${props.idhabit}`, {
+//     method: "PUT",
+//     body: { title: "modification titre", description: "modification desc" },
+//   });
+//   emit("updatedata");
+// }
 </script>
 <template>
-  <form class="CardHabit" @submit="SaveHabit">
-    <div class="CardHabit__deletelayout">
-      <h2 class="CardHabit__Title">{{ titre }}</h2>
-      <MyButton v-if="props.isglobal === 0 ? true : false" class="CardHabit__delete-button" :disabled="false" @click="DeleteHabit">X</MyButton>
+  <form class="habit-card" @submit="SaveHabit">
+    <div class="habit-card__header">
+      <h2 class="habit-card__title">{{ titre }}</h2>
+      <MyButton
+        v-if="props.isglobal === 0 ? true : false"
+        class="habit-card__delete-btn"
+        :disabled="false"
+        @click="DeleteHabit"
+        >X</MyButton
+      >
     </div>
-    <h3>{{ description }}</h3>
-    <div>
-      <ProgressBarTitle v-if="props.isglobal === 1 ? true : false" :progress="progress" />
-      <ul v-if="props.isglobal === 1 ? true : false">
-        <li>Participants aujourd'hui : {{ todayUsers }}</li>
-        <li>Participants ce mois-ci : {{ monthlyUsers }}</li>
-        <li>Participants totaux : {{ totalAttempts }}</li>
+    <h3 class="habit-card__description">{{ description }}</h3>
+    <div class="habit-card__content">
+      <ProgressBarTitle
+        v-if="props.isglobal === 1 ? true : false"
+        :progress="progress"
+        class="habit-card__progress"
+      />
+      <ul v-if="props.isglobal === 1 ? true : false" class="habit-card__stats">
+        <li class="habit-card__stats-item">
+          Participants aujourd'hui : {{ todayUsers }}
+        </li>
+        <li class="habit-card__stats-item">
+          Participants ce mois-ci : {{ monthlyUsers }}
+        </li>
+        <li class="habit-card__stats-item">
+          Participants totaux : {{ totalAttempts }}
+        </li>
       </ul>
-      <div class="CardHabit__dateSection">
+      <div class="habit-card__tracking">
         <VueDatePicker
           v-model="date"
           :enable-time-picker="false"
           model-type="yyyy-MM-dd"
+          class="habit-card__date-picker"
         />
-        <CheckBox v-model="check" />
+        <CheckBox v-model="check" class="habit-card__checkbox" />
       </div>
-      <MyButton type="submit" :disabled="false">Ajouter</MyButton>
-      <NuxtLink v-if="props.isglobal === 0 ? true : false" :to="`/app/tracking/${lien}`">
-        <MyButton class="CardHabit__Button" :disabled="false"
-          >Voir l'historique</MyButton
-        >
+      <MyButton type="submit" :disabled="false" class="habit-card__submit"
+        >Ajouter</MyButton
+      >
+      <NuxtLink
+        v-if="props.isglobal === 0 ? true : false"
+        :to="`/app/tracking/${lien}`"
+        class="habit-card__history-link"
+      >
+        <MyButton class="habit-card__history-btn" :disabled="false">
+          Voir l'historique
+        </MyButton>
       </NuxtLink>
-      <div v-if="props.isglobal === 0 ? true : false" class="CardHabit__Edit-button-container">
-        
-        <MyButton class="CardHabit__Edit-button" :disabled="false" @click="UpdateHabit">Modifier</MyButton>
+      <div v-if="props.isglobal === 0 ? true : false" class="habit-card__edit">
+        <MyButton
+        type="button"
+          class="habit-card__edit-btn"
+          :disabled="false"
+          @click="toggleUpdate"
+        >
+          Modifier
+        </MyButton>
       </div>
     </div>
+    <Transition>
+      <CardUpdateOverlay v-if="update" :titrevalue="titrevalue" :descvalue="descvalue"/>
+    </Transition>
   </form>
 </template>
 
 <style lang="scss">
-.CardHabit {
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+.habit-card {
+  $this: &;
   border: 0.25px solid $gray800;
   border-radius: 20px;
   display: flex;
@@ -129,63 +181,81 @@ const cardHeight = computed(() => {
   flex-direction: column;
   justify-content: space-between;
   background-color: white;
-
-  .CardHabit__deletelayout {
+  position: relative;
+  overflow: hidden;
+  &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: fit-content;
     flex-wrap: nowrap;
-    gap: 1rem; 
-    
-    .CardHabit__delete-button {
-      margin: 0;
-      aspect-ratio: 1;
-      width: fit-content;
-      flex-shrink: 0; 
-      line-height: 0;
-      padding: 1rem;
-    }
-    
-    .CardHabit__Title {
-      color: $primaryColor;
-      font-size: 2rem;
-      margin-bottom: 0;
-      margin-top: 0;
-      text-transform: uppercase;
-      overflow: hidden; 
-      text-overflow: ellipsis; 
-      min-width: 0; 
-      flex: 1; 
+    gap: 1rem;
+  }
+
+  &__title {
+    color: $primaryColor;
+    font-size: 2rem;
+    margin: 0;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    flex: 1;
+  }
+
+  &__delete-btn {
+    margin: 0;
+    aspect-ratio: 1;
+    width: fit-content;
+    flex-shrink: 0;
+    line-height: 0;
+    padding: 1rem;
+    background-color: $errorColor;
+    border: $errorColor;
+  }
+
+  &__description {
+    margin: 1rem 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__stats {
+    padding-left: 1.5rem;
+
+    &-item {
+      &::marker {
+        color: $primaryColor;
+        font-size: 1.5rem;
+      }
     }
   }
 
-  .CardHabit__dateSection {
+  &__tracking {
     display: flex;
     width: 100%;
     gap: 1rem;
     justify-content: space-between;
     align-items: center;
-    margin-top: 1rem;
   }
-  .CardHabit__Button {
+
+  &__history-btn {
     background-color: $primaryDarkColor;
     padding: rem(8px) rem(16px);
   }
-  .CardHabit__Edit-button-container {
+
+  &__edit {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-  .CardHabit__Edit-button {
+  }
+
+  &__edit-btn {
     width: fit-content;
-    justify-content: flex-end;
-  }
-  }
-}
-ul {
-  li::marker {
-    color: $primaryColor;
-    font-size: 1.5rem;
+    z-index: 20;
   }
 }
 </style>

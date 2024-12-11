@@ -54,7 +54,7 @@ async function onSubmit(event: Event) {
       <MyInput v-model="password" :error="isError" placeholder="Mot de passe" />
       <div class="Login__buttonContainer">
         <NuxtLink class="Login_SwapText" :to="urlSwap">{{ textSwap }}</NuxtLink>
-        <MyButton :disabled="false" class="Login__button">></MyButton>
+        <MyButton :disabled="false" class="Login__button"><chevron /></MyButton>
       </div>
     </div>
   </form>
@@ -91,6 +91,8 @@ async function onSubmit(event: Event) {
       aspect-ratio: 1/1;
       font-size: xx-large;
       margin-top: 0;
+      line-height: 0;
+      padding: 1rem
     }
   }
   &__layout {
