@@ -1,35 +1,28 @@
 <script lang="ts" setup>
-defineProps<{
-  disabled: boolean
-  variant?: 'primary' | 'outline'
-}>()
 </script>
 
 <template>
   
-  <button
-    :class="{
-      MyButton: true,
-      '-outline': variant === 'outline',
-      '-disabled': disabled,
-    }"
-  >
+  <button class="DeleteButton">
     <slot/>
   </button>
 </template>
 
 <style lang="scss">
-.MyButton {
-  background: $primaryColor;
+.DeleteButton {
   color: $white;
-  padding: rem(16px) rem(32px);
   border-radius: rem(48px);
-  border: 1px solid $primaryColor;
   text-decoration: none;
   cursor: pointer;
   margin-top: 1rem;
-  width: 100%;
-
+  margin: 0;
+  aspect-ratio: 1;
+  width: fit-content;
+  flex-shrink: 0;
+  line-height: 0;
+  padding: 1rem;
+  background-color: $errorColor;
+  border: $errorColor;
   &:hover {
     background: $primaryDarkColor;
   }
@@ -62,3 +55,4 @@ defineProps<{
   }
 }
 </style>
+

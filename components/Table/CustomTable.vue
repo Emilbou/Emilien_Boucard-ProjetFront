@@ -1,18 +1,47 @@
 <script setup lang="ts">
 import type { HabitPayload } from '~/types/Habits';
 
-defineProps<{
-    response: HabitPayload['habit']
-}>()
+const valuebar = ref(0.000001);
+const valuebarSliced = computed(() => valuebar.value ? valuebar.value.toString().slice(0, 4) : "0");
+
+const props = defineProps<{
+   response: HabitPayload['habit']
+}>();
+
+const ItemCount = computed(() => {
+   return props.response?.trackings.length;
+});
+
+async function ProgressBarValue() {
+   if (!props.response?.trackings.length) return;
+   
+   const completed = props.response.trackings.filter(
+       (enregistrement) => enregistrement.completed === 1
+   ).length;
+   
+   valuebar.value = (completed / ItemCount.value) * 100;
+}
+onMounted(() => {
+    ProgressBarValue();
+});
+
+watch(() => props.response?.trackings, () => {
+    ProgressBarValue();
+}, { deep: true });
 </script>
 <template>
-  <div class="habits-performance-table">
-    <table class="habits-performance-table__container">
-      <thead class="habits-performance-table__header">
+    <div class="habits-performance-table">
+        <div v-if="response.trackings.length === 0" class="habits-performance-table__loading">
+          Pas de données
+        </div>
+        <div v-else-if="valuebar === 0.000001"> chargement</div>
+        <table v-else class="habits-performance-table__container">
+      <thead class="habits-performance-table__header" :style="{ '--progressBar': `${valuebar}%`}">
         <tr class="habits-performance-table__header-row">
           <th>Date</th>
           <th>Complété ?</th>
         </tr>
+        <span class="habits-performance-table__header-progress-bar-title"> {{ valuebarSliced }} %</span>
       </thead>
       <tbody>
         <tr v-for="enregistrement in response?.trackings" :key="enregistrement?.date" class="habits-performance-table__data-row" >
@@ -42,13 +71,38 @@ defineProps<{
   }
 
   &__header {
-    background-color: $primaryColor;
+  
     color: white;
+    position: relative;
+    &::before {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: var(--progressBar);
+        height: 100%;
+        z-index: 5;
+        background-color: $primaryColor;
+    }
+    &-progress-bar-title {
+      position: absolute;
+        top: 50%;
+        right: 50px;
+      z-index: 10;
+      color: black;
+      font-size: 1.5rem;
+      line-height: 0;
+      font-style: italic;
+      font-weight: bold;
+
+    }
   }
 
   &__header-row th {
     padding: 1rem;
     text-align: left;
+    z-index: 10;
+    position: relative;
   }
 
   &__data-row {

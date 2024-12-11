@@ -17,9 +17,12 @@ const { data : response } = await useAsyncData('history', async () => {
 </script>
 
 <template>
-    <div>
-        <div>Paramètres : {{ route.params.habit }}</div>
-        <div>Données : {{ response }}</div>
+    <div class="">
+      <div>
+        <h1>{{ response.habit.title }}</h1>
+        <h3>{{ response.habit.description }}</h3>
+      </div>
+
         <CustomTable :response="response"/>
     </div>
 </template>

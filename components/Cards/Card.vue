@@ -101,12 +101,12 @@ const updateDesc = ref("");
   <form class="habit-card" @submit="SaveHabit">
     <div class="habit-card__header">
       <h2 class="habit-card__title">{{ titre }}</h2>
-      <MyButton
+      <DeleteButton
         v-if="props.isglobal === 0 ? true : false"
         class="habit-card__delete-btn"
         :disabled="false"
         @click="DeleteHabit"
-        >X</MyButton
+        >X</DeleteButton
       >
     </div>
     <h3 class="habit-card__description">{{ description }}</h3>
