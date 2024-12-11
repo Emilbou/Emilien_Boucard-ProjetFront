@@ -37,6 +37,10 @@ const props = defineProps({
     type: String,
     default: "0",
   },
+  isglobal: {
+    type: Number,
+    default: 0,
+  },
 });
 
 // PUT pour mettre a jour des données
@@ -74,7 +78,7 @@ async function SaveHabit(event: Event) {
         <CheckBox v-model="check" />
       </div>
       <MyButton type="submit" :disabled="false">Ajouter</MyButton>
-      <NuxtLink :to="`/app/tracking/${lien}`">
+      <NuxtLink v-if="props.isglobal === 0 ? true : false" :to="`/app/tracking/${lien}`">
         <MyButton class="CardHabit__Button" :disabled="false"
           >Voir l'historique</MyButton
         >

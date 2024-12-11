@@ -1,25 +1,5 @@
 <script setup lang="ts">
 import { useAsyncData } from "#app";
-
-interface DashboardResponse {
-  globalHabits: Array<{
-    id: number;
-    progress: number;
-    user_id?: number;
-    title: string;
-    description: string;
-    is_global: number;
-    created_at: string;
-    today_users: number;
-    total_users: number;
-    total_completions: number;
-    total_attempts: number;
-    monthly_users: number;
-    completedToday: boolean;
-    success_rate: number;
-  }>;
-}
-
 const AddHabitTitre = ref("");
 const AddHabitDesc = ref("");
 
@@ -51,15 +31,44 @@ async function AddHabit(event: Event) {
 async function updatedata() {
   await refresh();
 }
+
+interface HabitItem {
+  id: number;
+  progress: number;
+  user_id?: number;
+  title: string;
+  description: string;
+  is_global: number;
+  created_at: string;
+  today_users: number;
+  total_users: number;
+  total_completions: number;
+  total_attempts: number;
+  monthly_users: number;
+  completedToday: boolean;
+  success_rate: number;
+}
+
+interface DashboardResponse {
+  globalHabits: HabitItem[];
+  personalHabits: HabitItem[];
+}
 </script>
 
 <template>
   <div>
-    <CardsContainer
-      v-if="response"
-      :response="response"
-      @updatedata-parent="updatedata"
-    />
+
+    <CardsContainer 
+    v-if="response"
+  :response="response?.globalHabits"
+  @updatedata-parent="updatedata"
+/>
+<CardsContainer 
+v-if="response"
+  :response="response?.personalHabits"
+  @updatedata-parent="updatedata"
+/>
+
     <pre>{{ response }}</pre>
 
     <form style="display: flex; flex-direction: column" @submit="AddHabit">
