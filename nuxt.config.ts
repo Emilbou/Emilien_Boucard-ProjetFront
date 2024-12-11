@@ -15,6 +15,12 @@ css: ['@/assets/scss/main.scss'],
     dataset: "production",
   },
 
+  runtimeConfig: {
+    public: {
+      apiTrackingBaseUrl: process.env.NUXT_PUBLIC_API_TRACKING_BASE_URL || '',
+    }
+  },
+
 
 components: [
   {

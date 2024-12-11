@@ -1,99 +1,62 @@
 <script lang="ts" setup>
+interface HabitItem {
+  id: number;
+  progress: number;
+  user_id?: number;
+  title: string;
+  description: string;
+  is_global: number;
+  created_at: string;
+  today_users: number;
+  total_users: number;
+  total_completions: number;
+  total_attempts: number;
+  monthly_users: number;
+  completedToday: boolean;
+  success_rate: number;
+}
 
-const CardArray = ref([
-  {
-    id: 1,
-    process: 10,
-    text: '1',
-    description: 'Description détaillée du premier élément qui explique son contenu et son utilité',
-    titre: 'Carte 1',
-  },
-  {
-    id: 2,
-    process: 20,
-    text: '1',
-    description: 'Description détaillée du deuxième élément avec ses caractéristiques spécifiques',
-    titre: 'Carte 2',
-  },
-  {
-    id: 3,
-    process: 30,
-    text: '1',
-    description: 'Description approfondie du troisième élément et de ses fonctionnalités',
-    titre: 'Carte 3',
-  },
-  {
-    id: 4,
-    process: 40,
-    text: '1',
-    description: "Explication détaillée du quatrième élément et de son rôle dans l'ensemble",
-    titre: 'Carte 4',
-  },
-  {
-    id: 5,
-    process: 50,
-    text: '1',
-    description: 'Description complète du cinquième élément avec ses particularités',
-    titre: 'Carte 5',
-  },
-  {
-    id: 6,
-    process: 60,
-    text: '1',
-    description: 'Description détaillée du sixième élément et de ses caractéristiques spécifiques',
-    titre: 'Carte 6',
-  },
-  {
-    id: 7,
-    process: 70,
-    text: '1',
-    description: 'Description approfondie du septième élément et de ses fonctionnalités',
-    titre: 'Carte 7',
-  },
-  {
-    id: 8,
-    process: 80,
-    text: '1',
-    description: "Explication détaillée du huitième élément et de son rôle dans l'ensemble",
-    titre: 'Carte 8',
-  
-  }
-])
+interface Props {
+  response: HabitItem[];
+}
 
+defineProps<Props>();
 
 const truncateDescriptions = (description: string) => {
-  console.log(description)
+  console.log(description);
   if (description.length > 50) {
-    return description.substring(0, 50) + '...'
+    return description.substring(0, 50) + "...";
   } else {
-    return description
+    return description;
   }
-}
+};
 
-const truncateCards = (cards: typeof CardArray) => {
-  if (cards.value.length > 4) {
-    return cards.value.slice(0, 4)
-  }
-  return cards.value
-}
-const expandToggle = ref(false)
+const emit = defineEmits(["updatedata-parent"]);
+
+const handleUpdateData = () => {
+  emit("updatedata-parent");
+};
 </script>
 
 <template>
-    <TransitionGroup name="list" tag="div" class="CardsContainer">
-      <CardMulti
-        v-for="item in expandToggle ? CardArray : truncateCards(ref(CardArray))"
-        :key="item.id"
-        :progress="item.process"
-        :text="item.text"
-        :description="truncateDescriptions(item.description)"
-        :titre="item.titre"
-      />
-    </TransitionGroup>
-  <ExpandableButton 
-  
-      :toggle-props="expandToggle"
-  @toggle-expand="expandToggle = !expandToggle" />
+  <TransitionGroup name="list" tag="div" class="CardsContainer">
+    <Card
+      v-for="item in response"
+      :key="item.id"
+      :idhabit="item.id"
+      :progress="item.success_rate"
+      :titre="item.title"
+      :monthly-users="item.monthly_users"
+      :today-users="item.today_users"
+      :total-attempts="item.total_attempts"
+      :description="truncateDescriptions(item.description)"
+      :lien="item.id.toString()"
+      :isglobal="item.is_global"
+      :titrevalue="item.title"
+      :descvalue="item.description"
+      @updatedata="handleUpdateData"
+    />
+  </TransitionGroup>
 </template>
 
 <style lang="scss">
@@ -102,10 +65,12 @@ const expandToggle = ref(false)
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1rem;
 }
+
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;
 }
+
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
