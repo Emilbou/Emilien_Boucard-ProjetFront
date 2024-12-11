@@ -7,7 +7,7 @@ const emit = defineEmits(["updatedata"]);
 const props = defineProps({
   progress: {
     type: Number,
-    default: 50,
+    default: 0,
   },
   todayUsers: {
     type: Number,
@@ -57,14 +57,17 @@ async function SaveHabit(event: Event) {
   check.value = ref(false);
   emit("updatedata");
 }
+const cardHeight = computed(() => {
+  return props.isglobal === 0 ? "fit-content" : "auto";
+});
 </script>
 <template>
   <form class="CardHabit" @submit="SaveHabit">
     <h2 class="CardHabit__Title">{{ titre }}</h2>
     <h3>{{ description }}</h3>
     <div>
-      <ProgressBarTitle :progress="progress" />
-      <ul>
+      <ProgressBarTitle v-if="props.isglobal === 1 ? true : false" :progress="progress" />
+      <ul v-if="props.isglobal === 1 ? true : false">
         <li>Participants aujourd'hui : {{ todayUsers }}</li>
         <li>Participants ce mois-ci : {{ monthlyUsers }}</li>
         <li>Participants totaux : {{ totalAttempts }}</li>
@@ -91,8 +94,9 @@ async function SaveHabit(event: Event) {
 .CardHabit {
   border: 0.25px solid $gray800;
   border-radius: 20px;
-  padding: 1rem;
   display: flex;
+  padding: 1rem;
+  height: v-bind(cardHeight);
   flex-direction: column;
   justify-content: space-between;
   .CardHabit__Title {
