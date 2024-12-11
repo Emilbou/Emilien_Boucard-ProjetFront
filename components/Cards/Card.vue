@@ -47,6 +47,7 @@ const props = defineProps({
 const date = ref();
 const check = ref();
 
+// je créer
 async function SaveHabit(event: Event) {
   event.preventDefault();
   useTrackingApi(`tracking/${props.idhabit}`, {
@@ -58,6 +59,7 @@ async function SaveHabit(event: Event) {
   emit("updatedata");
 }
 
+// je supprime 
 async function DeleteHabit(event: Event) {
   event.preventDefault();
   useTrackingApi(`habits/${props.idhabit}`, {
@@ -66,6 +68,15 @@ async function DeleteHabit(event: Event) {
   emit("updatedata");
 }
 
+// je modifie
+async function UpdateHabit(event: Event) {
+  event.preventDefault();
+  useTrackingApi(`habits/${props.idhabit}`, {
+    method: "PUT",
+    body: { title: "modification titre", description: "modification desc" },
+  });
+  emit("updatedata");
+}
 
 const cardHeight = computed(() => {
   return props.isglobal === 0 ? "fit-content" : "auto";
@@ -100,6 +111,10 @@ const cardHeight = computed(() => {
           >Voir l'historique</MyButton
         >
       </NuxtLink>
+      <div v-if="props.isglobal === 0 ? true : false" class="CardHabit__Edit-button-container">
+        
+        <MyButton class="CardHabit__Edit-button" :disabled="false" @click="UpdateHabit">Modifier</MyButton>
+      </div>
     </div>
   </form>
 </template>
@@ -156,6 +171,15 @@ const cardHeight = computed(() => {
   .CardHabit__Button {
     background-color: $primaryDarkColor;
     padding: rem(8px) rem(16px);
+  }
+  .CardHabit__Edit-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  .CardHabit__Edit-button {
+    width: fit-content;
+    justify-content: flex-end;
+  }
   }
 }
 ul {
