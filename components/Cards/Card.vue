@@ -68,8 +68,8 @@ async function SaveHabit(event: Event) {
     method: "POST",
     body: { date: date.value, completed: check.value },
   });
-  date.value = ref("");
-  check.value = ref(false);
+  date.value = "";
+  check.value = false;
   emit("updatedata");
 }
 
@@ -90,6 +90,7 @@ async function UpdateHabit(event: Event) {
     body: { title: updateTitre.value, description: updateDesc.value },
   });
   update.value = false;
+
   emit("updatedata");
 }
 

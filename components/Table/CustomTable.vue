@@ -39,7 +39,7 @@ watch(() => props.response?.trackings, () => {
       <thead class="habits-performance-table__header" :style="{ '--progressBar': `${valuebar}%`}">
         <tr class="habits-performance-table__header-row">
           <th>Date</th>
-          <th>Complété ?</th>
+          <th :style="valuebar < 50 ? 'color : black':'color : white'">Complété ?</th>
         </tr>
         <span class="habits-performance-table__header-progress-bar-title"> {{ valuebarSliced }} %</span>
       </thead>
