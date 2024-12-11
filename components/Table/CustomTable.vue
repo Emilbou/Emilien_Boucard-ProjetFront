@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { DashboardPayload } from '~/types/Dashboard';
+import type { HabitPayload } from '~/types/Habits';
 
 defineProps<{
-    response: DashboardPayload[]
+    response: HabitPayload['habit']
 }>()
 </script>
 <template>
@@ -15,12 +15,12 @@ defineProps<{
         </tr>
       </thead>
       <tbody>
-        <tr class="habits-performance-table__data-row">
-          <td v-for="enregistrement in response" :key="enregistrement.id" class="habits-performance-table__habit-name">
-            <h2>Méditation Quotidienne</h2>
+        <tr v-for="enregistrement in response?.trackings" :key="enregistrement?.date" class="habits-performance-table__data-row" >
+          <td  class="habits-performance-table__habit-name">
+            <h2>{{enregistrement.date}}</h2>
           </td>
-          <td v-for="enregistrement in response" :key="(enregistrement as DashboardPayload).id" class="habits-performance-table__habit-name">
-            Prendre 10 minutes pour méditer et se recentrer
+          <td  class="habits-performance-table__habit-name">
+            <h2>{{enregistrement.completed === 1 ? 'Complété' : 'Non Complété'}}</h2>
           </td>
         </tr>
       </tbody>

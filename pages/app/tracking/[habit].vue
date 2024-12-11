@@ -20,6 +20,6 @@ const { data : response } = await useAsyncData('history', async () => {
     <div>
         <div>Paramètres : {{ route.params.habit }}</div>
         <div>Données : {{ response }}</div>
-        <CustomTable/>
+        <CustomTable :response="response"/>
     </div>
 </template>
