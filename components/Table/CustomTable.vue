@@ -1,53 +1,122 @@
 <script setup lang="ts">
+import type { DashboardPayload } from '~/types/Dashboard';
+
 defineProps<{
-    tableArray: { index: number; date: string; statut: boolean; dateEnregistrement: string }[]
+    response: DashboardPayload[]
 }>()
 </script>
 <template>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined&icon_names=cancel,task_alt" rel="stylesheet">
-    <table class="table">
-        <thead class="table__head">
-            <tr>
-            <td>Date</td>
-            <td>Statut</td>
-            <td>Date d'enregistrement</td>
+  <div class="habits-performance-table">
+    <table class="habits-performance-table__container">
+      <thead class="habits-performance-table__header">
+        <tr class="habits-performance-table__header-row">
+          <th>Date</th>
+          <th>Complété ?</th>
         </tr>
-        </thead>
-        <tbody>
-                <tr v-for="item in tableArray" :key="item.index">
-                    <th class="table__item">{{item.date}}</th>
-                    <th class="table__item"><span class="material-symbols-outlined">{{ item.statut ? "&#xe2e6;" : "&#xe5c9;" }}</span> {{item.statut ? "Terminé" : "Non terminé"}}</th>
-                    <th class="table__item">{{ item.dateEnregistrement }}</th>
-                </tr>
-        </tbody>
+      </thead>
+      <tbody>
+        <tr class="habits-performance-table__data-row">
+          <td v-for="enregistrement in response" :key="enregistrement.id" class="habits-performance-table__habit-name">
+            <h2>Méditation Quotidienne</h2>
+          </td>
+          <td v-for="enregistrement in response" :key="(enregistrement as DashboardPayload).id" class="habits-performance-table__habit-name">
+            Prendre 10 minutes pour méditer et se recentrer
+          </td>
+        </tr>
+      </tbody>
     </table>
-    <span class="material-symbols-outlined">&#xe5c9;</span>
-    <span class="material-symbols-outlined">&#xe2e6;</span>
+  </div>
 </template>
 
 <style lang="scss">
-.table {
+.habits-performance-table {
+  padding: 1rem;
+
+  &__container {
     width: 100%;
-    border: solid 1px black;
-    border-radius: 5px;
-    .table__head {
-        tr {
-        border: solid 1px black;
+    border-collapse: collapse;
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
+
+  &__header {
+    background-color: $primaryColor;
+    color: white;
+  }
+
+  &__header-row th {
+    padding: 1rem;
+    text-align: left;
+  }
+
+  &__data-row {
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #f8f8f8;
     }
+
+    td {
+      padding: 1rem;
+      border-right: solid $primaryColor;
+      &:last-child {
+        border-right: none;
+      }
     }
-    .table__item     {
-        vertical-align: middle;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        .material-symbols-outlined {
-            color: $primaryColor;
-        }
-        &:has(span) {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  }
+
+  &__habit-name h2 {
+    color: $primaryColor;
+    font-size: 1.5rem;
+    margin: 0;
+  }
+
+  &__progress-container {
+    position: relative;
+    height: 20px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  &__progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: $primaryColor;
+    transition: width 0.3s ease;
+  }
+
+  &__progress-value {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    line-height: 20px;
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+
+  &__stats-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__stats-item {
+    color: #666;
+    margin-bottom: 0.5rem;
+
+    &:before {
+      content: "•";
+      color: $primaryColor;
+      font-weight: bold;
+      margin-right: 0.5rem;
     }
+  }
 }
 </style>

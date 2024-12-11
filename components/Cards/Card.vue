@@ -83,14 +83,19 @@ async function DeleteHabit(event: Event) {
 }
 
 // je modifie
-// async function UpdateHabit(event: Event) {
-//   event.preventDefault();
-//   useTrackingApi(`habits/${props.idhabit}`, {
-//     method: "PUT",
-//     body: { title: "modification titre", description: "modification desc" },
-//   });
-//   emit("updatedata");
-// }
+async function UpdateHabit(event: Event) {
+  event.preventDefault();
+  useTrackingApi(`habits/${props.idhabit}`, {
+    method: "PUT",
+    body: { title: updateTitre.value, description: updateDesc.value },
+  });
+  update.value = false;
+  emit("updatedata");
+}
+
+
+const updateTitre = ref("");
+const updateDesc = ref("");
 </script>
 <template>
   <form class="habit-card" @submit="SaveHabit">
@@ -148,14 +153,20 @@ async function DeleteHabit(event: Event) {
         type="button"
           class="habit-card__edit-btn"
           :disabled="false"
-          @click="toggleUpdate"
+          @click="update ? UpdateHabit($event) : toggleUpdate() "
         >
           Modifier
         </MyButton>
       </div>
     </div>
     <Transition>
-      <CardUpdateOverlay v-if="update" :titrevalue="titrevalue" :descvalue="descvalue"/>
+      <CardUpdateOverlay 
+      v-if="update"
+        v-model:model-value-titre="updateTitre"
+        v-model:model-value-desc="updateDesc"
+        :titrevalue="titre"
+        :descvalue="description"
+    />
     </Transition>
   </form>
 </template>
@@ -182,7 +193,6 @@ async function DeleteHabit(event: Event) {
   justify-content: space-between;
   background-color: white;
   position: relative;
-  overflow: hidden;
   &__header {
     display: flex;
     justify-content: space-between;
