@@ -9,8 +9,13 @@
 }
 
 
-h1, h2 {
+h1 {
     font-family: 'Gazpacho';
     color: $primaryColor;
     font-size: clamp(3rem, 7vw, 5rem);
+}
+h2 {
+    font-family: 'Gazpacho';
+    color: $primaryColor;
+    font-size: clamp(2rem, 5vw, 3rem);
 }
