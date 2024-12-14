@@ -68,8 +68,8 @@ async function SaveHabit(event: Event) {
     method: "POST",
     body: { date: date.value, completed: check.value },
   });
-  date.value = ref("");
-  check.value = ref(false);
+  date.value = "";
+  check.value = false;
   emit("updatedata");
 }
 
@@ -83,25 +83,31 @@ async function DeleteHabit(event: Event) {
 }
 
 // je modifie
-// async function UpdateHabit(event: Event) {
-//   event.preventDefault();
-//   useTrackingApi(`habits/${props.idhabit}`, {
-//     method: "PUT",
-//     body: { title: "modification titre", description: "modification desc" },
-//   });
-//   emit("updatedata");
-// }
+async function UpdateHabit(event: Event) {
+  event.preventDefault();
+  useTrackingApi(`habits/${props.idhabit}`, {
+    method: "PUT",
+    body: { title: updateTitre.value, description: updateDesc.value },
+  });
+  update.value = false;
+
+  emit("updatedata");
+}
+
+
+const updateTitre = ref("");
+const updateDesc = ref("");
 </script>
 <template>
   <form class="habit-card" @submit="SaveHabit">
     <div class="habit-card__header">
       <h2 class="habit-card__title">{{ titre }}</h2>
-      <MyButton
+      <DeleteButton
         v-if="props.isglobal === 0 ? true : false"
         class="habit-card__delete-btn"
         :disabled="false"
         @click="DeleteHabit"
-        >X</MyButton
+        >X</DeleteButton
       >
     </div>
     <h3 class="habit-card__description">{{ description }}</h3>
@@ -148,14 +154,20 @@ async function DeleteHabit(event: Event) {
         type="button"
           class="habit-card__edit-btn"
           :disabled="false"
-          @click="toggleUpdate"
+          @click="update ? UpdateHabit($event) : toggleUpdate() "
         >
           Modifier
         </MyButton>
       </div>
     </div>
     <Transition>
-      <CardUpdateOverlay v-if="update" :titrevalue="titrevalue" :descvalue="descvalue"/>
+      <CardUpdateOverlay 
+      v-if="update"
+        v-model:model-value-titre="updateTitre"
+        v-model:model-value-desc="updateDesc"
+        :titrevalue="titre"
+        :descvalue="description"
+    />
     </Transition>
   </form>
 </template>
@@ -182,7 +194,6 @@ async function DeleteHabit(event: Event) {
   justify-content: space-between;
   background-color: white;
   position: relative;
-  overflow: hidden;
   &__header {
     display: flex;
     justify-content: space-between;
