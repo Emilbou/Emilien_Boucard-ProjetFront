@@ -24,8 +24,8 @@ const {urlFor} = useSanityImage();
 .GlobalFeatures{
     display: flex;
     justify-content: space-evenly;
-    width: 100%;
     gap: 30px;
+    padding: 0 10%;
     @media screen and (max-width: 800px){
         flex-direction: column;
         justify-content: center;
@@ -65,13 +65,15 @@ const {urlFor} = useSanityImage();
         display: flex;
         flex-direction: column;
         .GlobalFeatures__title{
-            font-size: 20px;
+            font-size: 30px;
             color: white;
             font-weight: bold;
+            margin-bottom: 10px;
         }
         .GlobalFeatures__desc{
-            font-size: 10px;
+            font-size: 20px;
             color: white;
+            line-height: 1;
             font-weight: 200;
         }
     }

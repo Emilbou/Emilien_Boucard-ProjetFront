@@ -23,7 +23,17 @@ useSeoMeta({
     <MyHeader :title="homepageData?.titrePrincipal"/>
     <FirstView :homepage-data="homepageData"/>
     <div class="homepage-gradient-transition">{{ empty }}</div>
-    <GlobalFeatures :homepage-data="homepageData"/>
+<GlobalContainer>
+<template #SlotTitle>
+  <h3>Nos différentes fonctionnalités</h3>
+</template>
+<template #SlotDescription>
+  <p>Un panel d'action conçues rien que pour vous</p>
+</template>
+<template #SlotComponent>
+  <GlobalFeatures :homepage-data="homepageData"/>
+</template>
+</GlobalContainer>
     <!-- <div v-if="homepageData">
       <pre>{{ homepageData }}</pre>
     </div> -->
@@ -33,6 +43,7 @@ useSeoMeta({
 <style lang="scss">
 .homepage-gradient-transition {
   background: linear-gradient($backgroundColor, white);
-  height: 200px;
+  height: 50px;
 }
+
 </style>
