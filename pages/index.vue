@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Homepage } from "@/types";
-
+const empty = "";
 definePageMeta({
   layout: "none",
 });
@@ -22,11 +22,17 @@ useSeoMeta({
   <div>
     <MyHeader :title="homepageData?.titrePrincipal"/>
     <FirstView :homepage-data="homepageData"/>
-    
+    <div class="homepage-gradient-transition">{{ empty }}</div>
+    <GlobalFeatures :homepage-data="homepageData"/>
     <!-- <div v-if="homepageData">
       <pre>{{ homepageData }}</pre>
     </div> -->
   </div>
 </template>
 
-
+<style lang="scss">
+.homepage-gradient-transition {
+  background: linear-gradient($backgroundColor, white);
+  height: 200px;
+}
+</style>

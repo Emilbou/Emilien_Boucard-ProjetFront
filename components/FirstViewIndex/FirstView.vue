@@ -105,6 +105,7 @@ defineProps<{
     justify-content: space-between;
     border-top: solid 1px $primaryColor;
     border-right: solid 1px $primaryColor;
+    border-bottom: solid 1px $primaryColor;
     margin-bottom: 0;
 
     @media screen and (max-width: 768px) {

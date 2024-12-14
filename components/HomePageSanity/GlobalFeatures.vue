@@ -1,17 +1,15 @@
 <script setup lang="ts">
-defineProps({
-    post : {
-        type: Object,
-        default: () => ({})
-    }
-})
+import type { Homepage } from '~/types';
+defineProps<{
+  homepageData: Homepage | null;
+}>()
 
 const {urlFor} = useSanityImage();
 </script>
 
 <template>
     <div class="GlobalFeatures">
-        <div v-for="item in post[0].fonctionnalites" :key="item._key" class="GlobalFeatures__container" :style="{backgroundColor: item.couleurFond}">
+        <div v-for="item in homepageData?.fonctionnalites" :key="item._key" class="GlobalFeatures__container" :style="{backgroundColor: item.couleurFond}">
             <div class="GlobalFeatures__iconContainer">
                 <img v-if="item.icone"  class="GlobalFeatures__icon" :src="urlFor(item.icone)?.url()" :alt="item.titreFonctionnalite">
             </div>

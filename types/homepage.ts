@@ -63,6 +63,7 @@ export interface Fonctionnalite {
   _key: string;
   couleurFond: string;
   titreFonctionnalite: string;
+  icone?: string;
 }
 
 export interface Avantage {
