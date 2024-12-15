@@ -56,6 +56,17 @@ useSeoMeta({
   <GlobalComment :homepage-data="homepageData"/>
 </template>
 </GlobalContainer>
+<GlobalContainer>
+<template #SlotTitle>
+  <h3>Tarification</h3>
+</template>
+<template #SlotDescription>
+  <p>Découvrez les différentes offres</p>
+</template>
+<template #SlotComponent>
+  <GlobalTarif :homepage-data="homepageData"/>
+</template>
+</GlobalContainer>
     <!-- <div v-if="homepageData">
       <pre>{{ homepageData }}</pre>
     </div> -->

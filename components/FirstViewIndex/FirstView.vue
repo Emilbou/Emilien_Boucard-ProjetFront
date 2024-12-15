@@ -107,8 +107,9 @@ defineProps<{
     border-right: solid 1px $primaryColor;
     border-bottom: solid 1px $primaryColor;
     margin-bottom: 0;
-
+    
     @media screen and (max-width: 768px) {
+      border-right: none;
       width: 100%;
       padding: 2rem 0;
       border-radius: 0;

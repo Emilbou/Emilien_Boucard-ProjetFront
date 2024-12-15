@@ -52,7 +52,6 @@ const {urlFor} = useSanityImage();
 .testimonials {
   padding: 2rem 1rem;
   background-color: $backgroundColor;
-  width: 100%;
 
   @media (min-width: 768px) {
     padding: 4rem 0;
