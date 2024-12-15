@@ -67,6 +67,17 @@ useSeoMeta({
   <GlobalTarif :homepage-data="homepageData"/>
 </template>
 </GlobalContainer>
+<GlobalContainer>
+<template #SlotTitle>
+  <h3>Foire aux questions</h3>
+</template>
+<template #SlotDescription>
+  <p>Les questions qui reviennent souvent !</p>
+</template>
+<template #SlotComponent>
+  <GlobalFaq :homepage-data="homepageData"/>
+</template>
+</GlobalContainer>
     <!-- <div v-if="homepageData">
       <pre>{{ homepageData }}</pre>
     </div> -->

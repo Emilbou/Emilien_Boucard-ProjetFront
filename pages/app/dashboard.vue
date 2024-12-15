@@ -30,8 +30,9 @@ async function AddHabit(event: Event) {
 
 async function updatedata() {
   await refresh();
+  console.log("Data mise à jour" + response.value);
 }
-
+updatedata();
 interface HabitItem {
   id: number;
   progress: number;
@@ -57,7 +58,6 @@ interface DashboardResponse {
 
 <template>
   <div>
-
     <CardsContainer 
     v-if="response"
   :response="response?.globalHabits"
@@ -68,7 +68,6 @@ v-if="response"
   :response="response?.personalHabits"
   @updatedata-parent="updatedata"
 />
-<FormData></FormData>
 
     <pre>{{ response }}</pre>
 

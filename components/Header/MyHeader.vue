@@ -10,19 +10,23 @@ defineProps<{
       <h3 class="header__title">{{ title }}</h3>
     </div>
     <div class="header__buttons">
-      <MyButton 
-        class="header__button"
-        :disabled="false" 
-        variant="outline"
-      >
-        Login
-      </MyButton>
-      <MyButton 
-        class="header__button"
-        :disabled="false"
-      >
-        Register
-      </MyButton>
+      <NuxtLink to="/connection">
+        <MyButton
+          class="header__button"
+          :disabled="false"
+          variant="outline"
+        >
+          Login
+        </MyButton>
+      </NuxtLink>
+      <NuxtLink to="/inscription">
+        <MyButton
+          class="header__button"
+          :disabled="false"
+        >
+          Register
+        </MyButton>
+      </NuxtLink>
     </div>
   </div>
 </template>

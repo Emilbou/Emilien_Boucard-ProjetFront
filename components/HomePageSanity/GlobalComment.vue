@@ -55,6 +55,7 @@ const {urlFor} = useSanityImage();
 
   @media (min-width: 768px) {
     padding: 4rem 0;
+    width: 100%;
   }
 
   &__container {
