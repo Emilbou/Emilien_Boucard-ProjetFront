@@ -110,7 +110,7 @@ defineProps<{
 
     @media screen and (max-width: 768px) {
       width: 100%;
-      padding: 2rem;
+      padding: 2rem 0;
       border-radius: 0;
       flex-wrap: wrap;
       gap: 2rem;

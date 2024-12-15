@@ -55,6 +55,7 @@ export interface Temoignage {
   roleUtilisateur: string;
   nomUtilisateur: string;
   _key: string;
+  photoUtilisateur: string;
 }
 
 export interface Fonctionnalite {

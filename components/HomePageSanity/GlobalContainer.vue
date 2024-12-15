@@ -22,6 +22,11 @@ const empty = "";
   flex-direction: column;
   width: 100%;
   height: 100svh;
+  @media screen and (max-width: 800px) {
+
+    height: fit-content;
+    
+  }
   &__title-content {
     text-align: center;
     margin-top: 50px;

@@ -34,6 +34,28 @@ useSeoMeta({
   <GlobalFeatures :homepage-data="homepageData"/>
 </template>
 </GlobalContainer>
+<GlobalContainer>
+<template #SlotTitle>
+  <h3>Comment l'utiliser ?</h3>
+</template>
+<template #SlotDescription>
+  <p>Avec son interface user friendly l'utilisation du service est un vrai jeu d'enfant !</p>
+</template>
+<template #SlotComponent>
+  <GlobalUse :homepage-data="homepageData"/>
+</template>
+</GlobalContainer>
+<GlobalContainer>
+<template #SlotTitle>
+  <h3>Ils l'ont essayé</h3>
+</template>
+<template #SlotDescription>
+  <p>Ils sont mieux placés que nous pour vous en parler !</p>
+</template>
+<template #SlotComponent>
+  <GlobalComment :homepage-data="homepageData"/>
+</template>
+</GlobalContainer>
     <!-- <div v-if="homepageData">
       <pre>{{ homepageData }}</pre>
     </div> -->
