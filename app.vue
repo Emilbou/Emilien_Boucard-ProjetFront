@@ -7,13 +7,12 @@
 </template>
 
 <style lang="scss">
-.main-app {
-background-color: $backgroundColor;
-}
 .page-enter-active,
 .page-leave-active {
   transition: all 0.3s;
 }
+
+div
 .page-enter-from {
   opacity: 0;
   transform: translateX(100vw)
@@ -24,4 +23,5 @@ background-color: $backgroundColor;
   opacity: 0;
   transform: translateX(-100vw)
 }
+
 </style>

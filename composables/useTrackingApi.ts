@@ -9,8 +9,8 @@ export default async function (
   }
 ) {
   try {
-    const config = useRuntimeConfig();
-    const response = await fetch(`${config.public.apiTrackingBaseUrl}${endpoint}`, {
+    // const config = useRuntimeConfig();
+    const response = await fetch(`http://localhost:4000/${endpoint}`, {
       method,
       headers: {
         "content-type": "application/json",
